@@ -117,15 +117,18 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
         m_audioManager.PlaySound("Death");
     }
 
+    
     void AE_SwordAttack()
     {
         m_audioManager.PlaySound("SwordAttack");
     }
 
+    
     void AE_SheathSword()
     {
         m_audioManager.PlaySound("SheathSword");
     }
+    
 
     void AE_Dodge()
     {

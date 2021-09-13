@@ -38,6 +38,13 @@ public class PrototypeHero : MonoBehaviour {
     private float               m_gravity;
     public float                m_maxSpeed = 4.5f;
 
+
+    //Attack stuff
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask enemyLayer;
+    public int attackDamage;
+
     // Use this for initialization
     void Start ()
     {
@@ -255,6 +262,19 @@ public class PrototypeHero : MonoBehaviour {
 
             // Disable movement 
             m_disableMovementTimer = 0.35f;
+
+            // Check if enemy in target area
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+
+            // If so call enemy method somehow
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                Debug.Log("The enemy " + enemy.name + " was hit");
+                enemy.GetComponent<BanditNPC>().TakeDamage(attackDamage);
+            }
+
+
+
         }
 
         //Air Slam Attack
@@ -436,4 +456,10 @@ public class PrototypeHero : MonoBehaviour {
         m_dead = false;
         m_animator.Rebind();
     }
+
+    void Attack()
+    {
+
+    }
+
 }
