@@ -23,21 +23,32 @@ public class BanditNPC : MonoBehaviour {
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
+        currentHealth = _MaxHealth;
     }
 
     public void TakeDamage(int damage)
     {
+
+        // Put in a text or something like that to show damage over the bandits head
+
         currentHealth -= damage;
+
+        Debug.Log("Enemy health at " + currentHealth);
+            m_animator.SetTrigger("Hurt");
 
         if (currentHealth <= 0)
         {
             Die();
         }
+
     }
 
     void Die()
     {
         Debug.Log("The enemy is dead!");
+        //Die animation
+        m_animator.SetTrigger("Death");
+
     }
 	
 	// Update is called once per frame
