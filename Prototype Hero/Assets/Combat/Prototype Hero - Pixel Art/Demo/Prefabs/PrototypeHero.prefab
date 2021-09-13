@@ -223,7 +223,7 @@ MonoBehaviour:
   m_maxSpeed: 4.5
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8388608
   attackRangeBasic: 0.7
   attackPointBasic: {fileID: 8321335388458695784}
   attackDamageBasic: 10

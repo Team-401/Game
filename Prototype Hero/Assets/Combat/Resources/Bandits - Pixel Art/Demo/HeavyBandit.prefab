@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4532010589869964}
   - component: {fileID: 114204724084870448}
   - component: {fileID: 61751993304262736}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: GroundSensor
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 50959880312528810}
   - component: {fileID: 61346583712760016}
   - component: {fileID: 1367517199043730848}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: HeavyBandit
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -236,3 +236,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_speed: 4
   m_jumpForce: 7.5
+  _MaxHealth: 0
