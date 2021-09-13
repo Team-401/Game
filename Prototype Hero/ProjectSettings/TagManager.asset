@@ -12,7 +12,6 @@ TagManager:
   - Water
   - UI
   - 
-  -
   - 
   - 
   - 
@@ -29,7 +28,8 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Enemy
+  - Player
   - 
   - 
   - 

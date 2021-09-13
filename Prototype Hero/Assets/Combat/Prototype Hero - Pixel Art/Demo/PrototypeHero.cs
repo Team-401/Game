@@ -38,6 +38,20 @@ public class PrototypeHero : MonoBehaviour {
     private float               m_gravity;
     public float                m_maxSpeed = 4.5f;
 
+
+    //Attack stuff
+    public LayerMask enemyLayer;
+
+    //Basic Attack
+    public float attackRangeBasic = 0.5f;
+    public Transform attackPointBasic;
+    public int attackDamageBasic = 10;
+
+    //Upwards Attacks
+    public float attackRangeUp = 0.5f;
+    public Transform attackPointUp;
+    public int attackDamageUp = 20;
+
     // Use this for initialization
     void Start ()
     {
@@ -255,6 +269,9 @@ public class PrototypeHero : MonoBehaviour {
 
             // Disable movement 
             m_disableMovementTimer = 0.35f;
+
+            HandleAttack(attackPointBasic, attackRangeBasic);
+
         }
 
         //Air Slam Attack
@@ -285,6 +302,9 @@ public class PrototypeHero : MonoBehaviour {
 
             // Reset timer
             m_timeSinceAttack = 0.0f;
+
+            HandleAttack(attackPointBasic, attackRangeBasic);
+
         }
 
         // Dodge
@@ -297,6 +317,7 @@ public class PrototypeHero : MonoBehaviour {
             m_body2d.velocity = new Vector2(m_facingDirection * m_dodgeForce, m_body2d.velocity.y);
         }
 
+        /*
         // Throw
         else if(Input.GetKeyDown("f") && m_grounded && !m_dodging && !m_ledgeGrab && !m_ledgeClimb)
         {
@@ -305,6 +326,7 @@ public class PrototypeHero : MonoBehaviour {
             // Disable movement 
             m_disableMovementTimer = 0.20f;
         }
+        */
 
         // Ledge Climb
         else if(Input.GetKeyDown("w") && m_ledgeGrab)
@@ -372,6 +394,20 @@ public class PrototypeHero : MonoBehaviour {
             m_animator.SetInteger("AnimState", 0);
     }
 
+    public void HandleAttack(Transform attackTarget, float attackRange )
+    {
+        // Check if enemy in target area
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackTarget.position, attackRange, enemyLayer);
+
+        // If so call enemy method somehow
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            Debug.Log("The enemy " + enemy.name + " was hit");
+            enemy.GetComponent<BanditNPC>().TakeDamage(attackDamageBasic);
+        }
+    }
+
+
     // Function used to spawn a dust effect
     // All dust effects spawns on the floor
     // dustXoffset controls how far from the player the effects spawns.
@@ -436,4 +472,10 @@ public class PrototypeHero : MonoBehaviour {
         m_dead = false;
         m_animator.Rebind();
     }
+
+    void Attack()
+    {
+
+    }
+
 }
