@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 19d7ffd0823a8fd45895de366276fca4
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Carolingia (BigfooT)
+  fontNames:
+  - Carolingia (BigfooT)
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: f29ce991670b24d4893366ee0354f88e, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
