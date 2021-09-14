@@ -57,6 +57,8 @@ public class PrototypeHero : MonoBehaviour {
     public Transform attackPointDown;
     public int attackDamageDown = 40;
 
+    private bool _slamming;
+
     // Use this for initialization
     void Start ()
     {
@@ -297,7 +299,7 @@ public class PrototypeHero : MonoBehaviour {
             // Reset timer
             m_timeSinceAttack = 0.0f;
 
-            HandleAttack(attackPointDown, attackRangeDown, attackDamageDown);
+            _slamming = true;
         }
 
         // Air Attack Up
@@ -409,6 +411,16 @@ public class PrototypeHero : MonoBehaviour {
         //Idle
         else
             m_animator.SetInteger("AnimState", 0);
+
+        if (_slamming)
+        {
+            HandleAttack(attackPointDown, attackRangeDown, attackDamageDown);
+        } 
+
+        if (_slamming && m_grounded)
+        {
+            _slamming = false;
+        }
     }
 
     public void HandleAttack(Transform attackTarget, float attackRange, int damage )
