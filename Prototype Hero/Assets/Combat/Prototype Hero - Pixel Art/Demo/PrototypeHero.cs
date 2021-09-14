@@ -52,6 +52,11 @@ public class PrototypeHero : MonoBehaviour {
     public Transform attackPointUp;
     public int attackDamageUp = 20;
 
+    //Downward Attack
+    public float attackRangeDown = 0.1f;
+    public Transform attackPointDown;
+    public int attackDamageDown = 40;
+
     // Use this for initialization
     void Start ()
     {
@@ -123,12 +128,18 @@ public class PrototypeHero : MonoBehaviour {
         {
             m_SR.flipX = false;
             m_facingDirection = 1;
+            Vector2 temp = new Vector2(0.56f, 0.21f);
+            Vector2 playerPos = m_body2d.position;
+            attackPointBasic.transform.position = temp+playerPos;
         }
             
         else if (inputRaw < 0 && !m_dodging && !m_wallSlide && !m_ledgeGrab && !m_ledgeClimb)
         {
             m_SR.flipX = true;
             m_facingDirection = -1;
+            Vector2 temp = new Vector2(-0.56f, 0.21f);
+            Vector2 playerPos = m_body2d.position;
+            attackPointBasic.transform.position = temp + playerPos;
         }
      
         // SlowDownSpeed helps decelerate the characters when stopping
@@ -246,6 +257,8 @@ public class PrototypeHero : MonoBehaviour {
 
             // Disable movement 
             m_disableMovementTimer = 0.35f;
+
+            HandleAttack(attackPointUp, attackRangeUp, attackDamageUp);
         }
 
         //Attack
@@ -270,7 +283,7 @@ public class PrototypeHero : MonoBehaviour {
             // Disable movement 
             m_disableMovementTimer = 0.35f;
 
-            HandleAttack(attackPointBasic, attackRangeBasic);
+            HandleAttack(attackPointBasic, attackRangeBasic, attackDamageBasic);
 
         }
 
@@ -283,6 +296,8 @@ public class PrototypeHero : MonoBehaviour {
 
             // Reset timer
             m_timeSinceAttack = 0.0f;
+
+            HandleAttack(attackPointDown, attackRangeDown, attackDamageDown);
         }
 
         // Air Attack Up
@@ -293,6 +308,8 @@ public class PrototypeHero : MonoBehaviour {
 
             // Reset timer
             m_timeSinceAttack = 0.0f;
+
+            HandleAttack(attackPointUp, attackRangeUp, attackDamageUp);
         }
 
         // Air Attack
@@ -303,7 +320,7 @@ public class PrototypeHero : MonoBehaviour {
             // Reset timer
             m_timeSinceAttack = 0.0f;
 
-            HandleAttack(attackPointBasic, attackRangeBasic);
+            HandleAttack(attackPointBasic, attackRangeBasic, attackDamageBasic);
 
         }
 
@@ -394,7 +411,7 @@ public class PrototypeHero : MonoBehaviour {
             m_animator.SetInteger("AnimState", 0);
     }
 
-    public void HandleAttack(Transform attackTarget, float attackRange )
+    public void HandleAttack(Transform attackTarget, float attackRange, int damage )
     {
         // Check if enemy in target area
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackTarget.position, attackRange, enemyLayer);
@@ -403,7 +420,7 @@ public class PrototypeHero : MonoBehaviour {
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("The enemy " + enemy.name + " was hit");
-            enemy.GetComponent<BanditNPC>().TakeDamage(attackDamageBasic);
+            enemy.GetComponent<BanditNPC>().TakeDamage(damage);
         }
     }
 
@@ -477,5 +494,4 @@ public class PrototypeHero : MonoBehaviour {
     {
 
     }
-
 }
