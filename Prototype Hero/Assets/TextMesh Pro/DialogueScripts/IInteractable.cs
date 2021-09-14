@@ -1,6 +1,6 @@
 ﻿
 public interface IInteractable
 {
-    void Interact(PrototypeHero player);
+    void Interact(DialogueUI dialogueUI);
 
 }

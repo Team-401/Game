@@ -5,8 +5,23 @@ public class DialogueActivator : MonoBehaviour, IInteractable
 {
     [SerializeField] private DialogueObject dialogueObject;
 
-    public void Interact(PrototypeHero player)
+    public void Interact(DialogueUI dialogueUI)
     {
-        player.DialogueUI.ShowDialogue(dialogueObject);
+        dialogueUI.ShowDialogue(dialogueObject);
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && other.TryGetComponent(out Interactions interactions))
+        {
+            interactions.Interactable = this;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && other.TryGetComponent(out Interactions interactions))
+        {
+            interactions.Interactable = null;
+        }
+
     }
 }
