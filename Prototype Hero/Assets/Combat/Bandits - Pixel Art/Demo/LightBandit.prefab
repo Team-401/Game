@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 50512961935941442}
   - component: {fileID: 61252362154681264}
   - component: {fileID: -2070922077006548649}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: LightBandit
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ MonoBehaviour:
     m_Bits: 16777216
   attackPointBasic: {fileID: 8364579460658588067}
   swordAttackDelay: 0.3
-  attackHitRange: 0.4
+  attackHitRange: 0.5
   timeBetweenAttacks: 0.5
   attackDamageBasic: 10
 --- !u!1 &1943394156383696
@@ -272,7 +272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8376270891894713458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.685, y: 0.739, z: 0}
+  m_LocalPosition: {x: -0.241, y: 0.903, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4805181885227780}
