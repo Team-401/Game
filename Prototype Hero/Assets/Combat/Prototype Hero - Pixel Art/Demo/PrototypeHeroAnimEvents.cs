@@ -35,10 +35,10 @@ public class PrototypeHeroAnimEvents : MonoBehaviour
         m_player.SpawnDustEffect(m_RunStopDust, dustXOffset, dustYOffset);
     }
 
-    void AE_setPositionToClimbPosition()
-    {
-        m_player.SetPositionToClimbPosition();
-    }
+    //void AE_setPositionToClimbPosition()
+    //{
+    //    m_player.SetPositionToClimbPosition();
+    //}
 
     void AE_runStop()
     {

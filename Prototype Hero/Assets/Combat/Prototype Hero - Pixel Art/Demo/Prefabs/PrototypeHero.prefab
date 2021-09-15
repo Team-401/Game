@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 5779919143759674799}
   - component: {fileID: 7853426713638563735}
   - component: {fileID: 7953872935334828980}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: PrototypeHero
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -284,22 +284,19 @@ MonoBehaviour:
   m_noBlood: 0
   m_hideSword: 0
   m_maxSpeed: 4.5
-  currentHealth: 1000
+  maxHealth: 100
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8388608
   attackDamage: 10
   attackRangeBasic: 0.4
   attackPointBasic: {fileID: 3274489477883490628}
-  attackDamageBasic: 1
   attackRangeUpPrimary: 0.75
   attackRangeUpSecondary: 0.55
   attackPointUpPrimary: {fileID: 6220438203838928900}
   attackPointUpSecondary: {fileID: 8321335388458695784}
-  attackDamageUp: 2
   attackRangeDown: 0.4
   attackPointDown: {fileID: 496828454708749394}
-  attackDamageDown: 4
 --- !u!50 &7853426713638563735
 Rigidbody2D:
   serializedVersion: 4

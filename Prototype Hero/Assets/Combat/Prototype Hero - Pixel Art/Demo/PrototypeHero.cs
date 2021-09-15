@@ -15,10 +15,10 @@ public class PrototypeHero : MonoBehaviour {
     private Rigidbody2D         m_body2d;
     private SpriteRenderer      m_SR;
     private Sensor_Prototype    m_groundSensor;
-    private Sensor_Prototype    m_wallSensorR1;
-    private Sensor_Prototype    m_wallSensorR2;
-    private Sensor_Prototype    m_wallSensorL1;
-    private Sensor_Prototype    m_wallSensorL2;
+    //private Sensor_Prototype    m_wallSensorR1;
+    //private Sensor_Prototype    m_wallSensorR2;
+    //private Sensor_Prototype    m_wallSensorL1;
+    //private Sensor_Prototype    m_wallSensorL2;
     private bool                m_grounded = false;
     private bool                m_moving = false;
     private bool                m_dead = false;
@@ -77,10 +77,10 @@ public class PrototypeHero : MonoBehaviour {
         m_gravity = m_body2d.gravityScale;
 
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Prototype>();
-        m_wallSensorR1 = transform.Find("WallSensor_R1").GetComponent<Sensor_Prototype>();
-        m_wallSensorR2 = transform.Find("WallSensor_R2").GetComponent<Sensor_Prototype>();
-        m_wallSensorL1 = transform.Find("WallSensor_L1").GetComponent<Sensor_Prototype>();
-        m_wallSensorL2 = transform.Find("WallSensor_L2").GetComponent<Sensor_Prototype>();
+        //m_wallSensorR1 = transform.Find("WallSensor_R1").GetComponent<Sensor_Prototype>();
+        //m_wallSensorR2 = transform.Find("WallSensor_R2").GetComponent<Sensor_Prototype>();
+        //m_wallSensorL1 = transform.Find("WallSensor_L1").GetComponent<Sensor_Prototype>();
+        //m_wallSensorL2 = transform.Find("WallSensor_L2").GetComponent<Sensor_Prototype>();
     }
 
     // Update is called once per frame
@@ -157,7 +157,9 @@ public class PrototypeHero : MonoBehaviour {
         // SlowDownSpeed helps decelerate the characters when stopping
         float SlowDownSpeed = m_moving ? 1.0f : 0.5f;
         // Set movement
-        if(!m_dodging && !m_ledgeGrab && !m_ledgeClimb && !m_crouching && m_parryTimer < 0.0f)
+
+        // REMOVED: !m_ledgeGrab && !m_ledgeClimb &&
+        if (!m_dodging && !m_crouching && m_parryTimer < 0.0f)
             m_body2d.velocity = new Vector2(inputX * m_maxSpeed * SlowDownSpeed, m_body2d.velocity.y);
 
         // Set AirSpeed in animator
@@ -167,56 +169,56 @@ public class PrototypeHero : MonoBehaviour {
         int boolInt = m_hideSword ? 1 : 0;
         m_animator.SetLayerWeight(1, boolInt);
 
-        // Check if all sensors are setup properly
-        if (m_wallSensorR1 && m_wallSensorR2 && m_wallSensorL1 && m_wallSensorL2)
-        {
-            bool prevWallSlide = m_wallSlide;
-            //Wall Slide
-            // True if either both right sensors are colliding and character is facing right
-            // OR if both left sensors are colliding and character is facing left
-            m_wallSlide = (m_wallSensorR1.State() && m_wallSensorR2.State() && m_facingDirection == 1) || (m_wallSensorL1.State() && m_wallSensorL2.State() && m_facingDirection == -1);
-            if (m_grounded)
-                m_wallSlide = false;
-            m_animator.SetBool("WallSlide", m_wallSlide);
-            //Play wall slide sound
-            if(prevWallSlide && !m_wallSlide)
-                AudioManager_PrototypeHero.instance.StopSound("WallSlide");
+        //// Check if all sensors are setup properly
+        //if (m_wallSensorR1 && m_wallSensorR2 && m_wallSensorL1 && m_wallSensorL2)
+        //{
+        //    bool prevWallSlide = m_wallSlide;
+        //    //Wall Slide
+        //    // True if either both right sensors are colliding and character is facing right
+        //    // OR if both left sensors are colliding and character is facing left
+        //    m_wallSlide = (m_wallSensorR1.State() && m_wallSensorR2.State() && m_facingDirection == 1) || (m_wallSensorL1.State() && m_wallSensorL2.State() && m_facingDirection == -1);
+        //    if (m_grounded)
+        //        m_wallSlide = false;
+        //    m_animator.SetBool("WallSlide", m_wallSlide);
+        //    //Play wall slide sound
+        //    if(prevWallSlide && !m_wallSlide)
+        //        AudioManager_PrototypeHero.instance.StopSound("WallSlide");
 
 
-            //Grab Ledge
-            // True if either bottom right sensor is colliding and top right sensor is not colliding 
-            // OR if bottom left sensor is colliding and top left sensor is not colliding 
-            bool shouldGrab = !m_ledgeClimb && !m_ledgeGrab && ((m_wallSensorR1.State() && !m_wallSensorR2.State()) || (m_wallSensorL1.State() && !m_wallSensorL2.State()));
-            if(shouldGrab)
-            {
-                Vector3 rayStart;
-                if (m_facingDirection == 1)
-                    rayStart = m_wallSensorR2.transform.position + new Vector3(0.2f, 0.0f, 0.0f);
-                else
-                    rayStart = m_wallSensorL2.transform.position - new Vector3(0.2f, 0.0f, 0.0f);
+        //    //Grab Ledge
+        //    // True if either bottom right sensor is colliding and top right sensor is not colliding 
+        //    // OR if bottom left sensor is colliding and top left sensor is not colliding 
+        //    bool shouldGrab = !m_ledgeClimb && !m_ledgeGrab && ((m_wallSensorR1.State() && !m_wallSensorR2.State()) || (m_wallSensorL1.State() && !m_wallSensorL2.State()));
+        //    if(shouldGrab)
+        //    {
+        //        Vector3 rayStart;
+        //        if (m_facingDirection == 1)
+        //            rayStart = m_wallSensorR2.transform.position + new Vector3(0.2f, 0.0f, 0.0f);
+        //        else
+        //            rayStart = m_wallSensorL2.transform.position - new Vector3(0.2f, 0.0f, 0.0f);
 
-                var hit = Physics2D.Raycast(rayStart, Vector2.down, 1.0f);
+        //        var hit = Physics2D.Raycast(rayStart, Vector2.down, 1.0f);
 
-                GrabableLedge ledge = null;
-                if(hit)
-                    ledge = hit.transform.GetComponent<GrabableLedge>();
+        //        GrabableLedge ledge = null;
+        //        if(hit)
+        //            ledge = hit.transform.GetComponent<GrabableLedge>();
 
-                if (ledge)
-                {
-                    m_ledgeGrab = true;
-                    m_body2d.velocity = Vector2.zero;
-                    m_body2d.gravityScale = 0;
+        //        if (ledge)
+        //        {
+        //            m_ledgeGrab = true;
+        //            m_body2d.velocity = Vector2.zero;
+        //            m_body2d.gravityScale = 0;
                     
-                    m_climbPosition = ledge.transform.position + new Vector3(ledge.topClimbPosition.x, ledge.topClimbPosition.y, 0);
-                    if (m_facingDirection == 1)
-                        transform.position = ledge.transform.position + new Vector3(ledge.leftGrabPosition.x, ledge.leftGrabPosition.y, 0);
-                    else
-                        transform.position = ledge.transform.position + new Vector3(ledge.rightGrabPosition.x, ledge.rightGrabPosition.y, 0);
-                }
-                m_animator.SetBool("LedgeGrab", m_ledgeGrab);
-            }
+        //            m_climbPosition = ledge.transform.position + new Vector3(ledge.topClimbPosition.x, ledge.topClimbPosition.y, 0);
+        //            if (m_facingDirection == 1)
+        //                transform.position = ledge.transform.position + new Vector3(ledge.leftGrabPosition.x, ledge.leftGrabPosition.y, 0);
+        //            else
+        //                transform.position = ledge.transform.position + new Vector3(ledge.rightGrabPosition.x, ledge.rightGrabPosition.y, 0);
+        //        }
+        //        m_animator.SetBool("LedgeGrab", m_ledgeGrab);
+        //    }
             
-        }
+        //}
 
 
         // -- Handle Animations --
@@ -226,7 +228,7 @@ public class PrototypeHero : MonoBehaviour {
             m_animator.SetBool("noBlood", m_noBlood);
             m_animator.SetTrigger("Death");
             m_respawnTimer = 2.5f;
-            DisableWallSensors();
+            //DisableWallSensors();
             m_dead = true;
         }
         
@@ -236,7 +238,7 @@ public class PrototypeHero : MonoBehaviour {
             m_animator.SetTrigger("Hurt");
             // Disable movement 
             m_disableMovementTimer = 0.1f;
-            DisableWallSensors();
+           // DisableWallSensors();
         }
 
         //3: Parry & parry stance
@@ -360,20 +362,20 @@ public class PrototypeHero : MonoBehaviour {
         */
 
         // 7: Ledge Climb
-        else if(Input.GetKeyDown("w") && m_ledgeGrab)
-        {
-            DisableWallSensors();
-            m_ledgeClimb = true;
-            m_body2d.gravityScale = 0;
-            m_disableMovementTimer = 6.0f/14.0f;
-            m_animator.SetTrigger("LedgeClimb");
-        }
+        //else if(Input.GetKeyDown("w") && m_ledgeGrab)
+        //{
+        //    DisableWallSensors();
+        //    m_ledgeClimb = true;
+        //    m_body2d.gravityScale = 0;
+        //    m_disableMovementTimer = 6.0f/14.0f;
+        //    m_animator.SetTrigger("LedgeClimb");
+        //}
 
         //8: Ledge Drop
-        else if (Input.GetKeyDown("s") && m_ledgeGrab)
-        {
-            DisableWallSensors();
-        }
+        //else if (Input.GetKeyDown("s") && m_ledgeGrab)
+        //{
+        //    DisableWallSensors();
+        //}
 
         //9: Jump
         else if (Input.GetButtonDown("Jump") && (m_grounded || m_wallSlide) && !m_dodging && !m_ledgeGrab && !m_ledgeClimb && !m_crouching && m_disableMovementTimer < 0.0f)
@@ -453,26 +455,6 @@ public class PrototypeHero : MonoBehaviour {
         }
     }
 
-    public void HandleAttackTwo(Transform attackTarget, Transform extraTarget, float attackRange, int damage)
-    {
-        // Check if enemy in target area
-        Collider2D[] primaryHitEnemies = Physics2D.OverlapCircleAll(attackTarget.position, attackRange, enemyLayer);
-        Collider2D[] secondaryHitEnemies = Physics2D.OverlapCircleAll(extraTarget.position, attackRange/2, enemyLayer);
-
-        // If so call enemy method somehow
-        foreach (Collider2D enemy in primaryHitEnemies)
-        {
-            Debug.Log("The enemy " + enemy.name + " was hit");
-            enemy.GetComponent<BanditNPC>().TakeDamage(damage * attackDamage);
-        }
-
-        foreach (Collider2D enemy in secondaryHitEnemies)
-        {
-            Debug.Log("The enemy " + enemy.name + " was hit");
-            enemy.GetComponent<BanditNPC>().TakeDamage(damage * attackDamage);
-        }
-    }
-
 
     // Function used to spawn a dust effect
     // All dust effects spawns on the floor
@@ -490,19 +472,19 @@ public class PrototypeHero : MonoBehaviour {
         }
     }
 
-    void DisableWallSensors()
-    {
-        m_ledgeGrab = false;
-        m_wallSlide = false;
-        m_ledgeClimb = false;
-        m_wallSensorR1.Disable(0.8f);
-        m_wallSensorR2.Disable(0.8f);
-        m_wallSensorL1.Disable(0.8f);
-        m_wallSensorL2.Disable(0.8f);
-        m_body2d.gravityScale = m_gravity;
-        m_animator.SetBool("WallSlide", m_wallSlide);
-        m_animator.SetBool("LedgeGrab", m_ledgeGrab);
-    }
+    //void DisableWallSensors()
+    //{
+    //    m_ledgeGrab = false;
+    //    m_wallSlide = false;
+    //    m_ledgeClimb = false;
+    //    m_wallSensorR1.Disable(0.8f);
+    //    m_wallSensorR2.Disable(0.8f);
+    //    m_wallSensorL1.Disable(0.8f);
+    //    m_wallSensorL2.Disable(0.8f);
+    //    m_body2d.gravityScale = m_gravity;
+    //    m_animator.SetBool("WallSlide", m_wallSlide);
+    //    m_animator.SetBool("LedgeGrab", m_ledgeGrab);
+    //}
 
     // Called in AE_resetDodge in PrototypeHeroAnimEvents
     public void ResetDodging()
@@ -510,17 +492,17 @@ public class PrototypeHero : MonoBehaviour {
         m_dodging = false;
     }
 
-    public void SetPositionToClimbPosition()
-    {
-        transform.position = m_climbPosition;
-        m_body2d.gravityScale = m_gravity;
-        m_wallSensorR1.Disable(3.0f / 14.0f);
-        m_wallSensorR2.Disable(3.0f / 14.0f);
-        m_wallSensorL1.Disable(3.0f / 14.0f);
-        m_wallSensorL2.Disable(3.0f / 14.0f);
-        m_ledgeGrab = false;
-        m_ledgeClimb = false;
-    }
+    //public void SetPositionToClimbPosition()
+    //{
+    //    transform.position = m_climbPosition;
+    //    m_body2d.gravityScale = m_gravity;
+    //    m_wallSensorR1.Disable(3.0f / 14.0f);
+    //    m_wallSensorR2.Disable(3.0f / 14.0f);
+    //    m_wallSensorL1.Disable(3.0f / 14.0f);
+    //    m_wallSensorL2.Disable(3.0f / 14.0f);
+    //    m_ledgeGrab = false;
+    //    m_ledgeClimb = false;
+    //}
 
     public bool IsWallSliding()
     {
@@ -561,7 +543,7 @@ public class PrototypeHero : MonoBehaviour {
         m_animator.SetBool("noBlood", m_noBlood);
         m_animator.SetTrigger("Death");
         m_respawnTimer = 2.5f;
-        DisableWallSensors();
+        //DisableWallSensors();
         m_dead = true;
     }
 
