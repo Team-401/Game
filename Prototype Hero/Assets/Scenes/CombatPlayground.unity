@@ -370,8 +370,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1367517199043730848, guid: 3248535f6a2562c489a1223a75951ef2,
         type: 3}
+      propertyPath: timeBetweenAttacks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1367517199043730848, guid: 3248535f6a2562c489a1223a75951ef2,
+        type: 3}
       propertyPath: attackStartDistance
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1367517199043730848, guid: 3248535f6a2562c489a1223a75951ef2,
+        type: 3}
+      propertyPath: smallestApproachDistance
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
@@ -449,12 +459,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 711295721}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &965862606
 PrefabInstance:
@@ -467,6 +477,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PrototypeHero
+      objectReference: {fileID: 0}
+    - target: {fileID: 5126507520524490402, guid: e481822248898d04e9808a3d3ca78e5a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 7216317338779392757, guid: e481822248898d04e9808a3d3ca78e5a,
         type: 3}
@@ -635,7 +650,7 @@ Transform:
   m_LocalScale: {x: 19.497498, y: 0.40825522, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -2.12, y: -0.06, z: 90}
 --- !u!1 &2021620929
 GameObject:
@@ -741,7 +756,7 @@ Transform:
   m_LocalScale: {x: 19.497498, y: 0.40825522, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!1 &2053744904
 GameObject:

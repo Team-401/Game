@@ -236,16 +236,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 4
-  m_jumpForce: 7.5
   _MaxHealth: 50
   detectionRange: 5
+  smallestApproachDistance: 1
   attackStartDistance: 2
-  attackDelay: 2
-  attackPointBasic: {fileID: 0}
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16777216
+  attackPointBasic: {fileID: 5228589585287549766}
+  swordAttackDelay: 0.3
   attackHitRange: 1
+  timeBetweenAttacks: 1
   attackDamageBasic: 25
 --- !u!1 &5303539316199738607
 GameObject:
