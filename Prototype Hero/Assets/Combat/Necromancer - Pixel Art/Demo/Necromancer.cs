@@ -21,8 +21,9 @@ public class Necromancer : MonoBehaviour {
     public LayerMask playerLayer;
     public Transform attackPointBasic;
     public float attackHitRange;
+    public int attackDamageMelee = 40;
 
-    private bool m_isDead;
+    private bool m_isDead =false;
     private int _currentHealth;
     private Transform player;
 
@@ -62,16 +63,18 @@ public class Necromancer : MonoBehaviour {
         float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
         float playerDirection = this.transform.position.x - player.position.x;
 
-        Debug.Log(distanceFromPlayer);
+        Debug.Log("entering animation stack" + distanceFromPlayer);
 
         // Swap direction of sprite depending on walk direction
         if (playerDirection > 0)
         {
             transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+            Debug.Log("positive direction");
         }
         else if (playerDirection < 0)
         {
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            Debug.Log("negative direction");
         }
 
         // Move
@@ -82,23 +85,32 @@ public class Necromancer : MonoBehaviour {
 
         // -- Handle Animations --
         //Death
-        if (Input.GetKeyDown("e"))
-        {
-            m_animator.SetBool("noBlood", m_noBlood);
-            m_animator.SetTrigger("Death");
-        }
-            
+        //if (Input.GetKeyDown("e"))
+        //{
+        //    m_animator.SetBool("noBlood", m_noBlood);
+        //    m_animator.SetTrigger("Death");
+        //}
+
         //Hurt
-        else if (Input.GetKeyDown("q"))
+        if (Input.GetKeyDown("q"))
+        {
             m_animator.SetTrigger("Hurt");
+            Debug.Log("pain");
+        }
 
         //Attack
         else if(Input.GetMouseButtonDown(0))
+        {
             m_animator.SetTrigger("Attack");
+            Debug.Log("smack");
+        }
 
         //Spellcast
         else if (Input.GetMouseButtonDown(1))
+        {
             m_animator.SetTrigger("Spellcast");
+            Debug.Log("zap");
+        }
 
         //Jump
         //else if (Input.GetKeyDown("space") && m_grounded)
@@ -118,6 +130,7 @@ public class Necromancer : MonoBehaviour {
 
             //This is not animation, this is the actual movement of the player
             transform.position = newLocation;
+            Debug.Log("trying to run");
 
         }
 
@@ -126,6 +139,7 @@ public class Necromancer : MonoBehaviour {
         {
             // Prevents flickering transitions to idle
             m_delayToIdle -= Time.deltaTime;
+            Debug.Log("idling");
                 if(m_delayToIdle < 0)
                     m_animator.SetInteger("AnimState", 0);
         }
@@ -142,7 +156,22 @@ public class Necromancer : MonoBehaviour {
 
         if (_currentHealth <= 0)
         {
+            m_animator.SetBool("noBlood", m_noBlood);
+            m_animator.SetTrigger("Death");
             Die();
+        }
+    }
+
+    public void HandleAttackSwordHardwired()
+    {
+        // Check if player in target area
+        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPointBasic.position, attackHitRange, playerLayer);
+
+        // If so call enemy method somehow
+        foreach (Collider2D player in hitPlayers)
+        {
+            Debug.Log("The player" + player.name + " was hit");
+            player.GetComponent<PrototypeHero>().TakeDamage(attackDamageMelee);
         }
     }
 
@@ -150,6 +179,7 @@ public class Necromancer : MonoBehaviour {
     {
         m_isDead = true;
         Debug.Log("The enemy is dead!");
+        
 
         Destroy(m_body2d);
         Destroy(m_boxCollider);

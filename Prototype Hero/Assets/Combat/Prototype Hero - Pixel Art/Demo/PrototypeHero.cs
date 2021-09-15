@@ -447,11 +447,23 @@ public class PrototypeHero : MonoBehaviour {
         // Check if enemy in target area
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackTarget.position, attackRange, enemyLayer);
 
+        if (hitEnemies.Length != 0)
+        {
+            _slamming = false;
+        }
+
         // If so call enemy method somehow
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("The enemy " + enemy.name + " was hit");
-            enemy.GetComponent<BanditNPC>().TakeDamage(damage*attackDamage);
+            if (enemy.name == "Necromancer")
+            {
+                enemy.GetComponent<Necromancer>().TakeDamage(damage*attackDamage);
+            }
+            if (enemy.name != "Necromancer")
+            {
+                enemy.GetComponent<BanditNPC>().TakeDamage(damage*attackDamage);
+            }
         }
     }
 
@@ -545,6 +557,14 @@ public class PrototypeHero : MonoBehaviour {
         m_respawnTimer = 2.5f;
         //DisableWallSensors();
         m_dead = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Death")
+        {
+            Die();
+        }
     }
 
     private void OnDrawGizmosSelected()
