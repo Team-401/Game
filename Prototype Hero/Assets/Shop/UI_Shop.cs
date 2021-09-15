@@ -24,6 +24,15 @@ public class UI_Shop : MonoBehaviour
     }
     public void Open()
     {
+        Text textP = BuyPotionButton.GetComponentInChildren<Text>();
+        textP.text = "Health Potion";
+
+        Text textC = BuyCharmButton.GetComponentInChildren<Text>();
+        textC.text = "Charm";
+
+        Text textS = BuySwordButton.GetComponentInChildren<Text>();
+        textS.text = "Steel Sword";
+
         shopBox.SetActive(true);
     }
     public void Close()
@@ -33,9 +42,9 @@ public class UI_Shop : MonoBehaviour
 
     public void BuyPotion()
     {
-        if(moneyAmount >= 25)
+        if(moneyAmount >= 10)
         {
-            moneyAmount = moneyAmount - 25;
+            moneyAmount = moneyAmount - 10;
             Debug.Log("Potion purchased, money: " + moneyAmount);
         }
         else
@@ -47,9 +56,9 @@ public class UI_Shop : MonoBehaviour
     }
     public void BuyCharm()
     {
-        if (moneyAmount >= 200)
+        if (moneyAmount >= 20)
         {
-            moneyAmount = moneyAmount - 200;
+            moneyAmount = moneyAmount - 20;
             Debug.Log("Charm purchased, money: " + moneyAmount);
         }
         else
@@ -61,9 +70,9 @@ public class UI_Shop : MonoBehaviour
     }
     public void BuySword()
     {
-        if (moneyAmount >= 250)
+        if (moneyAmount >= 25)
         {
-            moneyAmount = moneyAmount - 250;
+            moneyAmount = moneyAmount - 25;
             Debug.Log("Sword purchased, money: " + moneyAmount);
         }
         else
