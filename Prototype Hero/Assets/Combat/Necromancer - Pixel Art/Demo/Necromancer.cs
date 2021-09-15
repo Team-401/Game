@@ -22,10 +22,13 @@ public class Necromancer : MonoBehaviour {
     public Transform attackPointBasic;
     public float attackHitRange;
     public int attackDamageMelee = 40;
+    public float meleeAttackDelay;
+    public float timeBetweenAttacks;
 
     private bool m_isDead =false;
     private int _currentHealth;
     private Transform player;
+    private float m_timeSinceMeleeAttack = 2.0f;
 
     // Use this for initialization
     void Start ()
@@ -42,6 +45,13 @@ public class Necromancer : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        if (m_isDead)
+        {
+            return;
+        }
+
+        m_timeSinceMeleeAttack += Time.deltaTime;
+
         //Check if character just landed on the ground
         if (!m_grounded && m_groundSensor.State())
         {
@@ -63,19 +73,17 @@ public class Necromancer : MonoBehaviour {
         float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
         float playerDirection = this.transform.position.x - player.position.x;
 
-        Debug.Log("entering animation stack" + distanceFromPlayer);
 
-        // Swap direction of sprite depending on walk direction
-        if (playerDirection > 0)
+        if (m_timeSinceMeleeAttack < 1.2) { }
+        else if (playerDirection > 0)
         {
-            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-            Debug.Log("positive direction");
+            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);;
         }
         else if (playerDirection < 0)
         {
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            Debug.Log("negative direction");
         }
+        // Swap direction of sprite depending on walk direction
 
         // Move
         //m_body2d.velocity = new Vector2(playerDirection * m_speed, m_body2d.velocity.y);
@@ -85,24 +93,24 @@ public class Necromancer : MonoBehaviour {
 
         // -- Handle Animations --
         //Death
-        //if (Input.GetKeyDown("e"))
-        //{
-        //    m_animator.SetBool("noBlood", m_noBlood);
-        //    m_animator.SetTrigger("Death");
-        //}
 
+
+        if (m_timeSinceMeleeAttack < 1.2) { }
         //Hurt
-        if (Input.GetKeyDown("q"))
+        else if (Input.GetKeyDown("q"))
         {
             m_animator.SetTrigger("Hurt");
-            Debug.Log("pain");
         }
 
         //Attack
-        else if(Input.GetMouseButtonDown(0))
+        else if (distanceFromPlayer < attackStartDistance && m_timeSinceMeleeAttack > timeBetweenAttacks)
         {
+            m_timeSinceMeleeAttack = 0.0f;
+            Debug.Log("Attack triggered");
             m_animator.SetTrigger("Attack");
-            Debug.Log("smack");
+
+            //Call the sword attack slightly after animation starts
+            Invoke("HandleAttackSwordHardwired", meleeAttackDelay);
         }
 
         //Spellcast
@@ -130,8 +138,6 @@ public class Necromancer : MonoBehaviour {
 
             //This is not animation, this is the actual movement of the player
             transform.position = newLocation;
-            Debug.Log("trying to run");
-
         }
 
         //Idle

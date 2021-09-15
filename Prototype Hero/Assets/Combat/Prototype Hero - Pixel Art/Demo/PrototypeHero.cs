@@ -71,6 +71,12 @@ public class PrototypeHero : MonoBehaviour {
     {
         currentHealth = maxHealth;
 
+        //if (GameState.isComingFromForest == true)
+        //{
+        //    transform.position = new Vector3(8f, transform.position.y, transform.position.z);
+        //    GameState.isComingFromForest = false;
+        //}
+
         m_animator = GetComponentInChildren<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
         m_SR = GetComponentInChildren<SpriteRenderer>();
