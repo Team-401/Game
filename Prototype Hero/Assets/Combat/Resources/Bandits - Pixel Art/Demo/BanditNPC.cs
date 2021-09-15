@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BanditNPC : MonoBehaviour {
 
@@ -8,22 +9,39 @@ public class BanditNPC : MonoBehaviour {
 
     private Animator            m_animator;
     private Rigidbody2D         m_body2d;
+    private BoxCollider2D m_boxCollider;
     private Sensor_Bandit       m_groundSensor;
     private bool                m_grounded = false;
     private bool                m_combatIdle = false;
     private bool                m_isDead = false;
-
+    private float m_timeSinceAttack = 0.0f;
+    private float m_timeSinceDeath = 0.0f;
+    private Transform player;
 
     // Property area for health and such
     public int _MaxHealth;
     int currentHealth;
+    public float detectionRange;
+    public float attackStartDistance;
+    public float attackDelay;
+
+    public Transform attackPointBasic;
+    public LayerMask playerLayer;
+    public float attackHitRange;
+    public int attackDamageBasic;
+
+
 
     // Use this for initialization
     void Start () {
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
+        m_boxCollider = GetComponent<BoxCollider2D>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
         currentHealth = _MaxHealth;
+
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        Debug.Log(player.position);
     }
 
     public void TakeDamage(int damage)
@@ -40,19 +58,56 @@ public class BanditNPC : MonoBehaviour {
         {
             Die();
         }
-
     }
 
     void Die()
     {
+
+        m_isDead = true;
         Debug.Log("The enemy is dead!");
         //Die animation
         m_animator.SetTrigger("Death");
 
+        Destroy(m_body2d);
+        Destroy(m_boxCollider);
+
+        Invoke("cleanupDeath", 2.0f);
+    }
+
+    void cleanupDeath()
+    {
+        Destroy(this.gameObject);
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        m_timeSinceAttack += Time.deltaTime;
+
+        float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
+
+        // Handle movement towards player
+        if (distanceFromPlayer < detectionRange && !m_isDead )
+        {
+            transform.position = Vector2.MoveTowards(this.transform.position, player.position, m_speed * Time.deltaTime);
+        }
+
+        // Handle attack
+        if (distanceFromPlayer < attackStartDistance && !m_isDead)
+        {
+            // If enemy attack delay time is reached, attack.
+            if (m_timeSinceAttack > attackDelay)
+            {
+                m_timeSinceAttack = 0.0f;
+                Debug.Log("Attack triggered");
+                m_animator.SetTrigger("Attack");
+
+                HandleAttack(attackPointBasic, attackHitRange);
+
+            }
+        }
+
+        // Enemy movement script toward player
 
         /*
         //Check if character just landed on the ground
@@ -114,21 +169,39 @@ public class BanditNPC : MonoBehaviour {
             m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
             m_groundSensor.Disable(0.2f);
         }
-
-        //Run
-        else if (Mathf.Abs(inputX) > Mathf.Epsilon)
-            m_animator.SetInteger("AnimState", 2);
-
-        //Combat Idle
-        else if (m_combatIdle)
-            m_animator.SetInteger("AnimState", 1);
-
-        //Idle
-        else
-            m_animator.SetInteger("AnimState", 0);
         */
+
+        // //Run
+        // else if (Mathf.Abs(inputX) > Mathf.Epsilon)
+        //     m_animator.SetInteger("AnimState", 2);
+
+        // //Combat Idle
+        // else if (m_combatIdle)
+        //     m_animator.SetInteger("AnimState", 1);
+
+        // //Idle
+        // else
+        //     m_animator.SetInteger("AnimState", 0);
     }
 
+    public void HandleAttack(Transform attackTarget, float attackRange )
+    {
+        // Check if player in target area
+        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackTarget.position, attackRange, playerLayer);
+
+        // If so call enemy method somehow
+        foreach (Collider2D player in hitPlayers)
+        {
+            Debug.Log("The player" + player.name + " was hit");
+            player.GetComponent<PrototypeHero>().TakeDamage(attackDamageBasic);
+        }
+    }
+
+    private void OnDrawGizmosSelected() 
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);    
+    }
 
 
 }
