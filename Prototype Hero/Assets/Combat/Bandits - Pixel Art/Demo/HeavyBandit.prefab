@@ -245,7 +245,7 @@ MonoBehaviour:
     m_Bits: 16777216
   attackPointBasic: {fileID: 5228589585287549766}
   swordAttackDelay: 0.3
-  attackHitRange: 1
+  attackHitRange: 0.5
   timeBetweenAttacks: 1
   attackDamageBasic: 25
 --- !u!1 &5303539316199738607
@@ -258,7 +258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5228589585287549766}
   m_Layer: 0
-  m_Name: AttackPositionBasic
+  m_Name: AttackPointBasic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -272,7 +272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5303539316199738607}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.685, y: 0.739, z: 0}
+  m_LocalPosition: {x: -0.262, y: 0.95, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4588935210562790}
