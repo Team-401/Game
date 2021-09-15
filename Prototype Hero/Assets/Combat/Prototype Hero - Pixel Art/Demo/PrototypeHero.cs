@@ -36,8 +36,11 @@ public class PrototypeHero : MonoBehaviour {
     private int                 m_currentAttack = 0;
     private float               m_timeSinceAttack = 0.0f;
     private float               m_gravity;
-    public float                m_maxSpeed = 4.5f;
 
+
+    // Public Variables
+    public float m_maxSpeed = 4.5f;
+    public int currentHealth = 100;
 
     //Attack stuff
     public LayerMask enemyLayer;
@@ -117,18 +120,24 @@ public class PrototypeHero : MonoBehaviour {
             m_moving = true;
         else
             m_moving = false;
-
+            
         // Swap direction of sprite depending on move direction
         if (inputRaw > 0 && !m_dodging && !m_wallSlide && !m_ledgeGrab && !m_ledgeClimb)
         {
             m_SR.flipX = false;
             m_facingDirection = 1;
+            Vector2 temp = new Vector2(0.56f, 0.21f);
+            Vector2 playerPos = m_body2d.position;
+            attackPointBasic.transform.position = temp+playerPos;
         }
-            
+
         else if (inputRaw < 0 && !m_dodging && !m_wallSlide && !m_ledgeGrab && !m_ledgeClimb)
         {
             m_SR.flipX = true;
             m_facingDirection = -1;
+            Vector2 temp = new Vector2(-0.56f, 0.21f);
+            Vector2 playerPos = m_body2d.position;
+            attackPointBasic.transform.position = temp + playerPos;
         }
      
         // SlowDownSpeed helps decelerate the characters when stopping
@@ -473,9 +482,27 @@ public class PrototypeHero : MonoBehaviour {
         m_animator.Rebind();
     }
 
-    void Attack()
+    public void TakeDamage(int damage)
     {
 
+        // Put in a text or something like that to show damage over the bandits head
+
+        currentHealth -= damage;
+
+        Debug.Log("Player health at " + currentHealth);
+            m_animator.SetTrigger("Hurt");
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
+    void Die()
+    {
+        m_dead = true;
+        Debug.Log("The player is dead!");
+        //Die animation
+        m_animator.SetTrigger("Death");
+    }
 }

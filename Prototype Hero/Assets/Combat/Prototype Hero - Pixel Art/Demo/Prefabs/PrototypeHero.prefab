@@ -221,6 +221,7 @@ MonoBehaviour:
   m_noBlood: 0
   m_hideSword: 0
   m_maxSpeed: 4.5
+  currentHealth: 1000
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8388608
