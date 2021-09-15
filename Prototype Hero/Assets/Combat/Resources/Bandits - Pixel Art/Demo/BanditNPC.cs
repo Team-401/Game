@@ -68,6 +68,7 @@ public class BanditNPC : MonoBehaviour {
         Destroy(m_boxCollider);
 
         Invoke("cleanupDeath", 2.0f);
+        UICoin.BanditLoot();
     }
 
     void cleanupDeath()
