@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &273473552855641683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3274489477883490628}
+  m_Layer: 0
+  m_Name: AttackPointBasic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3274489477883490628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273473552855641683}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.063, y: 0.121, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7216317338779392757}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1254912165905175345
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,8 +124,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973148546774299884}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.39, y: 1.31, z: 0}
-  m_LocalScale: {x: 1, y: 0.29999998, z: 0}
+  m_LocalPosition: {x: -0.05, y: -0.367, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0}
   m_Children: []
   m_Father: {fileID: 7216317338779392757}
   m_RootOrder: 9
@@ -110,7 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6220438203838928900}
   m_Layer: 0
-  m_Name: AttackPointUp
+  m_Name: AttackPointUpPrimary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,7 +154,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4496111178373124171}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.057, z: 0}
+  m_LocalPosition: {x: 0, y: 0.968, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7216317338779392757}
@@ -230,6 +260,7 @@ Transform:
   - {fileID: 6220438203838928900}
   - {fileID: 6702394594324850331}
   - {fileID: 496828454708749394}
+  - {fileID: 3274489477883490628}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -256,15 +287,18 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8388608
-  attackRangeBasic: 0.7
-  attackPointBasic: {fileID: 8321335388458695784}
-  attackDamageBasic: 10
-  attackRangeUp: 0.5
-  attackPointUp: {fileID: 6220438203838928900}
-  attackDamageUp: 20
-  attackRangeDown: 0.1
+  attackDamage: 10
+  attackRangeBasic: 0.4
+  attackPointBasic: {fileID: 3274489477883490628}
+  attackDamageBasic: 1
+  attackRangeUpPrimary: 0.75
+  attackRangeUpSecondary: 0.55
+  attackPointUpPrimary: {fileID: 6220438203838928900}
+  attackPointUpSecondary: {fileID: 8321335388458695784}
+  attackDamageUp: 2
+  attackRangeDown: 0.4
   attackPointDown: {fileID: 496828454708749394}
-  attackDamageDown: 40
+  attackDamageDown: 4
 --- !u!50 &7853426713638563735
 Rigidbody2D:
   serializedVersion: 4
@@ -443,7 +477,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: 300ea1a5869382b43bf6149aba92c4db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -512,7 +546,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8321335388458695784}
   m_Layer: 0
-  m_Name: AttackPointBasic
+  m_Name: AttackPointUpSecondary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -526,7 +560,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6934815382365963202}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.56, y: 0.21, z: 0}
+  m_LocalPosition: {x: 0.382, y: 0.624, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7216317338779392757}
