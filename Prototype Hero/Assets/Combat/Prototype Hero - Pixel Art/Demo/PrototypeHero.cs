@@ -44,16 +44,26 @@ public class PrototypeHero : MonoBehaviour {
 
     //Attack stuff
     public LayerMask enemyLayer;
+    public int attackDamage = 10;
 
     //Basic Attack
     public float attackRangeBasic = 0.5f;
     public Transform attackPointBasic;
-    public int attackDamageBasic = 10;
+    private int attackDamageBasic = 1;
 
     //Upwards Attacks
-    public float attackRangeUp = 0.5f;
-    public Transform attackPointUp;
-    public int attackDamageUp = 20;
+    public float attackRangeUpPrimary = 0.75f;
+    public float attackRangeUpSecondary = 0.5f;
+    public Transform attackPointUpPrimary;
+    public Transform attackPointUpSecondary;
+    private int attackDamageUp = 1;
+
+    //Downward Attack
+    public float attackRangeDown = 0.5f;
+    public Transform attackPointDown;
+    private int attackDamageDown = 4;
+
+    private bool _slamming;
 
     // Use this for initialization
     void Start ()
@@ -255,6 +265,9 @@ public class PrototypeHero : MonoBehaviour {
 
             // Disable movement 
             m_disableMovementTimer = 0.35f;
+
+            HandleAttack(attackPointUpPrimary, attackRangeUpPrimary, attackDamageUp);
+            HandleAttack(attackPointBasic, attackRangeUpSecondary, attackDamageBasic);
         }
 
         //Attack
@@ -279,7 +292,7 @@ public class PrototypeHero : MonoBehaviour {
             // Disable movement 
             m_disableMovementTimer = 0.35f;
 
-            HandleAttack(attackPointBasic, attackRangeBasic);
+            HandleAttack(attackPointBasic, attackRangeBasic, attackDamageBasic);
 
         }
 
@@ -292,6 +305,8 @@ public class PrototypeHero : MonoBehaviour {
 
             // Reset timer
             m_timeSinceAttack = 0.0f;
+
+            _slamming = true;
         }
 
         // Air Attack Up
@@ -302,6 +317,9 @@ public class PrototypeHero : MonoBehaviour {
 
             // Reset timer
             m_timeSinceAttack = 0.0f;
+
+            HandleAttack(attackPointUpPrimary, attackRangeUpPrimary, attackDamageUp);
+            HandleAttack(attackPointBasic, attackRangeUpSecondary, attackDamageBasic);
         }
 
         // Air Attack
@@ -312,7 +330,7 @@ public class PrototypeHero : MonoBehaviour {
             // Reset timer
             m_timeSinceAttack = 0.0f;
 
-            HandleAttack(attackPointBasic, attackRangeBasic);
+            HandleAttack(attackPointBasic, attackRangeBasic, attackDamageBasic);
 
         }
 
@@ -401,9 +419,19 @@ public class PrototypeHero : MonoBehaviour {
         //Idle
         else
             m_animator.SetInteger("AnimState", 0);
+
+        if (_slamming)
+        {
+            HandleAttack(attackPointDown, attackRangeDown, attackDamageDown);
+        } 
+
+        if (_slamming && m_grounded)
+        {
+            _slamming = false;
+        }
     }
 
-    public void HandleAttack(Transform attackTarget, float attackRange )
+    public void HandleAttack(Transform attackTarget, float attackRange, int damage )
     {
         // Check if enemy in target area
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackTarget.position, attackRange, enemyLayer);
@@ -412,7 +440,27 @@ public class PrototypeHero : MonoBehaviour {
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("The enemy " + enemy.name + " was hit");
-            enemy.GetComponent<BanditNPC>().TakeDamage(attackDamageBasic);
+            enemy.GetComponent<BanditNPC>().TakeDamage(damage*attackDamage);
+        }
+    }
+
+    public void HandleAttackTwo(Transform attackTarget, Transform extraTarget, float attackRange, int damage)
+    {
+        // Check if enemy in target area
+        Collider2D[] primaryHitEnemies = Physics2D.OverlapCircleAll(attackTarget.position, attackRange, enemyLayer);
+        Collider2D[] secondaryHitEnemies = Physics2D.OverlapCircleAll(extraTarget.position, attackRange/2, enemyLayer);
+
+        // If so call enemy method somehow
+        foreach (Collider2D enemy in primaryHitEnemies)
+        {
+            Debug.Log("The enemy " + enemy.name + " was hit");
+            enemy.GetComponent<BanditNPC>().TakeDamage(damage * attackDamage);
+        }
+
+        foreach (Collider2D enemy in secondaryHitEnemies)
+        {
+            Debug.Log("The enemy " + enemy.name + " was hit");
+            enemy.GetComponent<BanditNPC>().TakeDamage(damage * attackDamage);
         }
     }
 
@@ -504,5 +552,17 @@ public class PrototypeHero : MonoBehaviour {
         Debug.Log("The player is dead!");
         //Die animation
         m_animator.SetTrigger("Death");
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(attackPointUpPrimary.position, attackRangeUpPrimary);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(attackPointUpSecondary.position, attackRangeUpSecondary);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPointBasic.position, attackRangeBasic);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(attackPointDown.position, attackRangeDown);
     }
 }
