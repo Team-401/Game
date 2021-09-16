@@ -8,11 +8,12 @@ using TMPro;
 public class UIPotion : MonoBehaviour
 {
     public TextMeshProUGUI potionText;
-    public static int potionCount;
+    public int potionCount;
     // Start is called before the first frame update
     void Start()
     {
         potionText = GetComponent<TextMeshProUGUI>();
+        potionCount = PlayerPrefs.GetInt("potions");
     }
 
     // Update is called once per frame
@@ -22,7 +23,7 @@ public class UIPotion : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.T)) { increasePotion(); }
     }
 
-    public static void increasePotion()
+    public void increasePotion()
     {
         if (potionCount + 1 >= 3)
         {
@@ -34,7 +35,7 @@ public class UIPotion : MonoBehaviour
         }
     }
 
-    public static void decreasePotion()
+    public void decreasePotion()
     {
         potionCount--;
     }
