@@ -3,7 +3,8 @@ using System.Collections;
 
 public class PrototypeHero : MonoBehaviour {
 
-    public UIHeroHPBar UIHpBar; 
+    public UIHeroHPBar UIHpBar;
+    public UIPotion potionUI;
     public float      m_runSpeed = 4.5f;
     public float      m_walkSpeed = 2.0f;
     public float      m_jumpForce = 7.5f;
@@ -101,11 +102,11 @@ public class PrototypeHero : MonoBehaviour {
         UIHpBar.SetHealth(currentHealth);
 
         // Conditions for using health postions and healing from using them
-        if (Input.GetKeyDown(KeyCode.E) && UIPotion.potionCount > 0 && currentHealth < 100) 
+        if (Input.GetKeyDown(KeyCode.E) && potionUI.potionCount > 0 && currentHealth < 100) 
         {
-            currentHealth = Mathf.Clamp(UIPotion.drinkPotion(currentHealth), 0, 100);
+            currentHealth = Mathf.Clamp(potionUI.drinkPotion(currentHealth), 0, 100);
             //Debug.Log(currentHealth);
-            UIPotion.decreasePotion();
+            potionUI.decreasePotion();
         }
 
         // Decrease death respawn timer 
