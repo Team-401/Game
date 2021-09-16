@@ -9,13 +9,6 @@ public class GreenBoltScript : MonoBehaviour
 
     private Vector3 _castDir;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -29,18 +22,6 @@ public class GreenBoltScript : MonoBehaviour
         Destroy(gameObject, 5f);
     }
 
-    static float GetAngleFromVectorFloat(Vector3 dir)
-    {
-        dir = dir.normalized;
-        float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        if (n < 0)
-        {
-            n += 360;
-        }
-
-        return n;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PrototypeHero hero = collision.GetComponent<PrototypeHero>();
@@ -52,5 +33,17 @@ public class GreenBoltScript : MonoBehaviour
             hero.TakeDamage(damage);
         }
         Destroy(gameObject);
+    }
+
+    static float GetAngleFromVectorFloat(Vector3 dir)
+    {
+        dir = dir.normalized;
+        float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        if (n < 0)
+        {
+            n += 360;
+        }
+
+        return n;
     }
 }

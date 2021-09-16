@@ -12,16 +12,11 @@ public class PrototypeHero : MonoBehaviour {
     public float      m_parryKnockbackForce = 4.0f; 
     public bool       m_noBlood = false;
     public bool       m_hideSword = false;
-    public float stillTimer;
 
     private Animator            m_animator;
     private Rigidbody2D         m_body2d;
     private SpriteRenderer      m_SR;
     private Sensor_Prototype    m_groundSensor;
-    //private Sensor_Prototype    m_wallSensorR1;
-    //private Sensor_Prototype    m_wallSensorR2;
-    //private Sensor_Prototype    m_wallSensorL1;
-    //private Sensor_Prototype    m_wallSensorL2;
     private bool                m_grounded = false;
     private bool                m_moving = false;
     private bool                m_dead = false;
@@ -30,7 +25,6 @@ public class PrototypeHero : MonoBehaviour {
     private bool                m_ledgeGrab = false;
     private bool                m_ledgeClimb = false;
     private bool                m_crouching = false;
-    private Vector3             m_climbPosition;
     private int                 m_facingDirection = 1;
     private float               m_disableMovementTimer = 0.0f;
     private float               m_parryTimer = 0.0f;
@@ -39,6 +33,7 @@ public class PrototypeHero : MonoBehaviour {
     private int                 m_currentAttack = 0;
     private float               m_timeSinceAttack = 0.0f;
     private float               m_gravity;
+    private float stillTimer = 0.58f;
     private int currentHealth;
 
 
@@ -93,9 +88,8 @@ public class PrototypeHero : MonoBehaviour {
         {
             currentHealth = Mathf.Clamp(potionUI.drinkPotion(currentHealth), 0, 100);
             potionUI.decreasePotion();
+            UIHpBar.SetHealth(currentHealth);
         }
-
-
 
         // Decrease death respawn timer 
         m_respawnTimer -= Time.deltaTime;
@@ -439,18 +433,23 @@ public class PrototypeHero : MonoBehaviour {
         m_dead = false;
         m_animator.Rebind();
         currentHealth = maxHealth;
+        m_dodging = false;
+
     }
 
     public void TakeDamage(int damage)
     {
         Debug.Log(m_parryTimer);
+        m_dodging = false;
+
         if (!m_dead && m_parryTimer <= 0)
         {
+            currentHealth -= damage;
+            m_crouching = false;
+
             // Updates the Current Health to display on the UI HP Bar
             UIHpBar.SetHealth(currentHealth);
-
-
-            currentHealth -= damage;
+            
             Debug.Log("Player health at " + currentHealth);
             m_animator.SetTrigger("Hurt");
             if (currentHealth <= 0)
@@ -469,6 +468,7 @@ public class PrototypeHero : MonoBehaviour {
         m_respawnTimer = 2.5f;
         //DisableWallSensors();
         m_dead = true;
+        m_crouching = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
