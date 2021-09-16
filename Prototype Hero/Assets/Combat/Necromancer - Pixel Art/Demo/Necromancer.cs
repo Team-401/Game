@@ -7,8 +7,9 @@ public class Necromancer : MonoBehaviour {
     //[SerializeField] float      m_jumpForce = 7.5f;
     [SerializeField] bool       m_noBlood = false;
 
-    public UIBossHPBarr        BossHPBarrUI;
+    public UIBossHPBarr        BossHPBarUI;
     public UIShowBossHPBar     ShowBossHPBarUI;
+    public Transform            SecondStage;
     private Animator            m_animator;
     private Rigidbody2D         m_body2d;
     private Sensor_Necromancer  m_groundSensor;
@@ -35,7 +36,7 @@ public class Necromancer : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        BossHPBarrUI.SetBossMaxHealth(MaxHealth);
+        BossHPBarUI.SetBossMaxHealth(200);
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Necromancer>();
@@ -48,7 +49,7 @@ public class Necromancer : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        BossHPBarrUI.SetBossHealth(_currentHealth);
+        BossHPBarUI.SetBossHealth(_currentHealth+100);
         if (m_isDead)
         {
             return;
@@ -161,7 +162,7 @@ public class Necromancer : MonoBehaviour {
     {
 
         // Put in a text or something like that to show damage over the bandits head
-        _currentHealth -= damage;
+        _currentHealth = Mathf.Clamp(_currentHealth -= damage, 0, 100);
         Debug.Log("Enemy health at " + _currentHealth);
 
         m_animator.SetTrigger("Hurt");
@@ -176,14 +177,17 @@ public class Necromancer : MonoBehaviour {
 
     public void HandleAttackSwordHardwired()
     {
-        // Check if player in target area
-        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPointBasic.position, attackHitRange, playerLayer);
-
-        // If so call enemy method somehow
-        foreach (Collider2D player in hitPlayers)
+        if (!m_isDead)
         {
-            Debug.Log("The player" + player.name + " was hit");
-            player.GetComponent<PrototypeHero>().TakeDamage(attackDamageMelee);
+            // Check if player in target area
+            Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPointBasic.position, attackHitRange, playerLayer);
+
+            // If so call enemy method somehow
+            foreach (Collider2D player in hitPlayers)
+            {
+                Debug.Log("The player" + player.name + " was hit");
+                player.GetComponent<PrototypeHero>().TakeDamage(attackDamageMelee);
+            }
         }
     }
 
@@ -198,6 +202,7 @@ public class Necromancer : MonoBehaviour {
 
         Invoke("cleanupDeath", 2.0f);
         //Hides Boss health bar upon defeat
+        SecondStage.position = transform.position;
     }
 
     void cleanupDeath()
