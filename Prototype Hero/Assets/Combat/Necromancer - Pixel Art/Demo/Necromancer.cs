@@ -151,7 +151,7 @@ public class Necromancer : MonoBehaviour {
         {
             // Prevents flickering transitions to idle
             m_delayToIdle -= Time.deltaTime;
-            Debug.Log("idling");
+            /*Debug.Log("idling");*/
                 if(m_delayToIdle < 0)
                     m_animator.SetInteger("AnimState", 0);
         }
