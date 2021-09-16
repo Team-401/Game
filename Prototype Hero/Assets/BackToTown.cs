@@ -8,23 +8,38 @@ public class BackToTown : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject player;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private UICoin coinUI;
+    [SerializeField] private UIPotion potionUI;
+    [SerializeField] private UISword swordUI;
+    [SerializeField] private UiCharm charmUI;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            //Debug.Log("Triggered");
-            GameState.isComingFromForest = true;
+            PlayerPrefs.SetInt("coins", coinUI.Count());
+            PlayerPrefs.SetInt("potions", potionUI.potionCount);
+            if (charmUI.HasCharm())
+            {
+                PlayerPrefs.SetInt("charm", 1);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("charm", 0);
+            }
+            if (swordUI.SwordStatus())
+            {
+                PlayerPrefs.SetInt("sword", 1);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("sword", 0);
+            }
+            Debug.Log($"coins: {PlayerPrefs.GetInt("coins")}");
+            Debug.Log($"potions: {PlayerPrefs.GetInt("potions")}");
+            Debug.Log($"sword: {PlayerPrefs.GetInt("sword")}");
+            Debug.Log($"charm: {PlayerPrefs.GetInt("charm")}");
+
             SceneManager.LoadScene(1);
         }
     }

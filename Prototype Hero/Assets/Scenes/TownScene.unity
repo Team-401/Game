@@ -378,6 +378,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 3230122759067247570, guid: 5b557207b79b5aa49a19f00cacee7d2f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3230122759067247574, guid: 5b557207b79b5aa49a19f00cacee7d2f,
         type: 3}
       propertyPath: m_Pivot.x
@@ -5834,6 +5839,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 700275348408045726, guid: d2c876b9dc9763341bfba6a6adf5821c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 700275349459678994, guid: d2c876b9dc9763341bfba6a6adf5821c,
         type: 3}
       propertyPath: m_Camera
@@ -5948,6 +5958,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 700275349479304306, guid: d2c876b9dc9763341bfba6a6adf5821c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 995232460144642350, guid: d2c876b9dc9763341bfba6a6adf5821c,
         type: 3}
@@ -6078,6 +6093,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5093012751451780444, guid: d2c876b9dc9763341bfba6a6adf5821c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6108822833827488906, guid: d2c876b9dc9763341bfba6a6adf5821c,
         type: 3}

@@ -42,8 +42,6 @@ public class IntoTheWilds : MonoBehaviour
             Debug.Log($"sword: {PlayerPrefs.GetInt("sword")}");
             Debug.Log($"charm: {PlayerPrefs.GetInt("charm")}");
 
-
-            //GameState.isComingFromForest = true;
             SceneManager.LoadScene(2);
         }
     }
