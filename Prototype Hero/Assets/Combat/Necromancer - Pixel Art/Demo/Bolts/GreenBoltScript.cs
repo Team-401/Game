@@ -38,7 +38,7 @@ public class GreenBoltScript : MonoBehaviour
             n += 360;
         }
 
-        return n+180;
+        return n;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
