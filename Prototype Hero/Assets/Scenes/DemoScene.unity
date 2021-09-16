@@ -688,6 +688,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &388425113 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4444433569144899906, guid: a0b08459132913b46b6ff66fa05124ed,
+    type: 3}
+  m_PrefabInstance: {fileID: 1123182151}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d2be2c1b464e14dbecb9363d39998e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &414831259
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2684,7 +2696,7 @@ PrefabInstance:
     - target: {fileID: 4444433569214649887, guid: a0b08459132913b46b6ff66fa05124ed,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4444433569632199984, guid: a0b08459132913b46b6ff66fa05124ed,
         type: 3}
@@ -2754,7 +2766,7 @@ PrefabInstance:
     - target: {fileID: 4444433570547330950, guid: a0b08459132913b46b6ff66fa05124ed,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5699838201288254178, guid: a0b08459132913b46b6ff66fa05124ed,
         type: 3}
@@ -3524,6 +3536,11 @@ PrefabInstance:
       propertyPath: UIHpBar
       value: 
       objectReference: {fileID: 729073386}
+    - target: {fileID: 5779919143759674799, guid: e481822248898d04e9808a3d3ca78e5a,
+        type: 3}
+      propertyPath: potionUI
+      value: 
+      objectReference: {fileID: 388425113}
     - target: {fileID: 7216317338779392757, guid: e481822248898d04e9808a3d3ca78e5a,
         type: 3}
       propertyPath: m_RootOrder
