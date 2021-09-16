@@ -5,6 +5,8 @@ public class PrototypeHero : MonoBehaviour {
 
     public UIHeroHPBar UIHpBar;
     public UIPotion potionUI;
+    public UIShop shopUI;
+
     public float      m_runSpeed = 4.5f;
     public float      m_walkSpeed = 2.0f;
     public float      m_jumpForce = 7.5f;
