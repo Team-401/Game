@@ -7,6 +7,7 @@ public class Necromancer : MonoBehaviour {
     //[SerializeField] float      m_jumpForce = 7.5f;
     [SerializeField] bool       m_noBlood = false;
 
+    public GameObject          SecondStageSpawner;
     public UIBossHPBarr        BossHPBarUI;
     public UIShowBossHPBar     ShowBossHPBarUI;
     public Transform            SecondStage;
@@ -200,9 +201,9 @@ public class Necromancer : MonoBehaviour {
         Destroy(m_body2d);
         Destroy(m_boxCollider);
 
-        Invoke("cleanupDeath", 2.0f);
+        Invoke("cleanupDeath", 0.0f);
         //Hides Boss health bar upon defeat
-        SecondStage.position = transform.position;
+        SecondStage.position = SecondStageSpawner.transform.position;
     }
 
     void cleanupDeath()

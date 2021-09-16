@@ -433,6 +433,7 @@ public class PrototypeHero : MonoBehaviour {
         m_dead = false;
         m_animator.Rebind();
         currentHealth = maxHealth;
+        UIHpBar.SetHealth(currentHealth);
         m_dodging = false;
 
     }
