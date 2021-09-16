@@ -9,15 +9,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2364679399696692599}
-  - component: {fileID: 1276119531889409319}
   - component: {fileID: 8127278166528728455}
   - component: {fileID: 9001719155041534623}
   - component: {fileID: 2884692987283472405}
   - component: {fileID: 3068447006152406070}
   - component: {fileID: 4494742375182855230}
-  m_Layer: 0
+  - component: {fileID: 3321020144581479054}
+  m_Layer: 23
   m_Name: Necromancer_Red
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,24 +34,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8947665191417191656}
+  - {fileID: 965463202532827658}
+  - {fileID: 2484408919565944192}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1276119531889409319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275148858543175968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e74bb1a6283a3f1438f8727d1f8d1ab9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_speed: 4
-  m_jumpForce: 7.5
-  m_noBlood: 0
 --- !u!95 &8127278166528728455
 Animator:
   serializedVersion: 3
@@ -85,6 +72,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -96,6 +84,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -108,7 +97,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3b290abebd884514c9e1bf1db2d6a845, type: 3}
+  m_Sprite: {fileID: 21300090, guid: 3b290abebd884514c9e1bf1db2d6a845, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -186,6 +175,91 @@ MonoBehaviour:
   - {r: 0.1764706, g: 0.023529414, b: 0.08627451, a: 1}
   - {r: 0.41960788, g: 0.08627451, b: 0.07450981, a: 1}
   - {r: 0.5921569, g: 0.1137255, b: 0.0627451, a: 1}
+--- !u!114 &3321020144581479054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275148858543175968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2272f7613b2ffc349a51314254d1d1ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_noBlood: 0
+  pfBolt: {fileID: 3115741878371457147, guid: 2285aaaf2a2febd4fbd4dfc9e5028dde, type: 3}
+  MaxHealth: 100
+  detectionRange: 0
+  smallestApproachDistance: 0
+  attackStartDistance: 2
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 16777216
+  attackPointBasic: {fileID: 965463202532827658}
+  attackDamageMelee: 40
+  greenBoltDelay: 0
+  BoltSpawnPoint: {fileID: 2484408919565944192}
+--- !u!1 &1461629519219042993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 965463202532827658}
+  m_Layer: 0
+  m_Name: AttackPointBasic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &965463202532827658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461629519219042993}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.047, y: 1.001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2364679399696692599}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5578091712795022723
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2484408919565944192}
+  m_Layer: 0
+  m_Name: BoltSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2484408919565944192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5578091712795022723}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.34, y: 1.66, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2364679399696692599}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6169600498781584563
 GameObject:
   m_ObjectHideFlags: 0

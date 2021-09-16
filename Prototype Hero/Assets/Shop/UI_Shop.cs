@@ -6,21 +6,22 @@ using UnityEngine.UI;
 public class UI_Shop : MonoBehaviour
 {
     [SerializeField] private GameObject shopBox;
-
+    [SerializeField] private UICoin coinUI;
+    [SerializeField] private UIPotion potionUI;
+    [SerializeField] private UISword swordUI;
+    [SerializeField] private UiCharm charmUI;
     public Button BuySwordButton;
     public Button BuyCharmButton;
     public Button BuyPotionButton;
 
-    public int moneyAmount;
+    private int moneyAmount;
 
     private void Start()
     {
-        moneyAmount = 500;
         Close();
     }
     public void Update()
     {
-        
     }
     public void Open()
     {
@@ -32,6 +33,8 @@ public class UI_Shop : MonoBehaviour
 
         Text textS = BuySwordButton.GetComponentInChildren<Text>();
         textS.text = "Steel Sword";
+
+        moneyAmount = coinUI.Count();
 
         shopBox.SetActive(true);
     }
@@ -46,6 +49,8 @@ public class UI_Shop : MonoBehaviour
         {
             moneyAmount = moneyAmount - 10;
             Debug.Log("Potion purchased, money: " + moneyAmount);
+            coinUI.decreaseCoins(10);
+            potionUI.increasePotion();
         }
         else
         {
@@ -56,10 +61,20 @@ public class UI_Shop : MonoBehaviour
     }
     public void BuyCharm()
     {
+        if(charmUI.HasCharm())
+        {
+            Text text = BuyCharmButton.GetComponentInChildren<Text>();
+            text.text = "Already purchased!";
+        }
         if (moneyAmount >= 20)
         {
-            moneyAmount = moneyAmount - 20;
-            Debug.Log("Charm purchased, money: " + moneyAmount);
+            if(true)
+            {
+                moneyAmount = moneyAmount - 20;
+                Debug.Log("Charm purchased, money: " + moneyAmount);
+                coinUI.decreaseCoins(20);
+                charmUI.GetCharm();
+            }
         }
         else
         {
@@ -70,10 +85,17 @@ public class UI_Shop : MonoBehaviour
     }
     public void BuySword()
     {
-        if (moneyAmount >= 25)
+        if(swordUI.SwordStatus())
+        {
+            Text text = BuySwordButton.GetComponentInChildren<Text>();
+            text.text = "Already purchased!";
+        }
+        else if (moneyAmount >= 25)
         {
             moneyAmount = moneyAmount - 25;
             Debug.Log("Sword purchased, money: " + moneyAmount);
+            coinUI.decreaseCoins(25);
+            swordUI.UpgradeSword();
         }
         else
         {

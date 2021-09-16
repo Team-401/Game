@@ -150,6 +150,9 @@ MonoBehaviour:
     m_Bits: 16777216
   attackPointBasic: {fileID: 1685420250725847058}
   attackHitRange: 1.4
+  attackDamageMelee: 40
+  meleeAttackDelay: 0.67
+  timeBetweenAttacks: 1.5
 --- !u!95 &813736259105069749
 Animator:
   serializedVersion: 3

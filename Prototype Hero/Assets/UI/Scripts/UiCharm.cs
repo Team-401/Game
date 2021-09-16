@@ -8,40 +8,40 @@ public class UiCharm : MonoBehaviour
     public Image UICharm;
     public bool hasCharm = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         UICharm = GetComponent<Image>();
+        int pref = PlayerPrefs.GetInt("charm");
+        if (pref != 0)
+        {
+            hasCharm = true;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (hasCharm == true)
         {
-            UICharmAlphaUp(1f);
+            UICharmAlphaSet(1f);
         }
         else
         {
-            UICharmAlphaDown(.5f);
+            UICharmAlphaSet(.3f);
         }
     }
-    public void UICharmAlphaUp(float input)
+    public void UICharmAlphaSet(float input)
     {
         var alpha = UICharm.color;
         alpha.a = input;
         UICharm.color = alpha;
     }
 
-    public void UICharmAlphaDown(float input)
-    {
-        var alpha = UICharm.color;
-        alpha.a = input;
-        UICharm.color = alpha;
-    }
-
-    public void HasCharm()
+    public void GetCharm()
     {
         hasCharm = true;
+    }
+    public bool HasCharm()
+    {
+        return hasCharm;
     }
 }

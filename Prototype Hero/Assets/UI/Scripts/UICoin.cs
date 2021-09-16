@@ -8,12 +8,13 @@ using TMPro;
 public class UICoin : MonoBehaviour
 {
     public TextMeshProUGUI coinText;
-    public static int coinCount;
-    public static bool canBuyItem;
+    public int coinCount;
+    public bool canBuyItem;
 
     private void Start()
     {
         coinText = GetComponent<TextMeshProUGUI>();
+        coinCount = PlayerPrefs.GetInt("coins");
     }
 
     private void Update()
@@ -27,12 +28,12 @@ public class UICoin : MonoBehaviour
         else { canBuyItem = false; }
     }
 
-    public static void BanditLoot()
+    public void BanditLoot()
     {
         increaseCoins(60);
     }
 
-    public static void increaseCoins(int coins)
+    public void increaseCoins(int coins)
     {
         if (coinCount + coins >= 99)
         {
@@ -44,8 +45,13 @@ public class UICoin : MonoBehaviour
         }
     }
 
-    public static void decreaseCoins(int coins)
+    public void decreaseCoins(int coins)
     {
         coinCount -= coins;
+    }
+
+    public int Count()
+    {
+        return coinCount;
     }
 }
