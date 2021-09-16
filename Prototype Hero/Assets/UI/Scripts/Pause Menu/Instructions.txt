@@ -1,0 +1,9 @@
+How to use Pause Menu
+
+Attach the pause menu prefab to the hierarchy.
+
+Then attach the pause script to the player object.
+
+On the script component drag the pause menu prefab into the pause menu slot. 
+
+Thats it!

@@ -22,10 +22,16 @@ public class LevelLoader : MonoBehaviour
     {
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
+
+    // If adding more scenes this will break. Have to change the values if more than 3 scenes >>>>not index 3<<<<
     IEnumerator LoadLevel(int levelIndex)
     {
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(transitionTime);
+        if(levelIndex >=3)
+        {
+            levelIndex = 0;
+        }
         SceneManager.LoadScene(levelIndex);
 
 
