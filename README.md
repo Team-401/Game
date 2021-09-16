@@ -12,7 +12,7 @@ The player can visit the town. The town has a market where the player can exchan
 The player can wander around a field and pick small fights can also collect items that can be used to trade in the town market
 
 ### Scene 3#: Final Battle
-The player will have a final battle with a boss. It will the dangerous and high potential for death
+The player will have a final battle with a boss. It will be dangerous and high potential for death
  
 ## Stretch Goals
 - pets
