@@ -7,6 +7,7 @@ public class BanditNPC : MonoBehaviour {
     [SerializeField] float      m_speed = 4.0f;
     //[SerializeField] float      m_jumpForce = 7.5f;
 
+    public UICoin coinUI;
     private Animator            m_animator;
     private Rigidbody2D         m_body2d;
     private BoxCollider2D m_boxCollider;
@@ -68,8 +69,7 @@ public class BanditNPC : MonoBehaviour {
         Destroy(m_boxCollider);
 
         Invoke("cleanupDeath", 2.0f);
-        //UICoin.BanditLoot();
-        //This needs an object Reference!
+        coinUI.BanditLoot();
     }
 
     void cleanupDeath()
