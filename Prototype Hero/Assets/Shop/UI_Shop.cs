@@ -15,6 +15,7 @@ public class UI_Shop : MonoBehaviour
     public Button BuyPotionButton;
 
     private int moneyAmount;
+    public bool IsOpen;
 
     private void Start()
     {
@@ -36,16 +37,25 @@ public class UI_Shop : MonoBehaviour
 
         moneyAmount = coinUI.Count();
 
+        IsOpen = true;
+        Cursor.visible = true;
         shopBox.SetActive(true);
     }
     public void Close()
     {
+        IsOpen = false;
+        Cursor.visible = false;
         shopBox.SetActive(false);
     }
 
     public void BuyPotion()
     {
-        if(moneyAmount >= 10)
+        if(potionUI.potionCount >= 3)
+        {
+            Text text = BuyPotionButton.GetComponentInChildren<Text>();
+            text.text = "Too many!";
+        }
+        else if(moneyAmount >= 10)
         {
             moneyAmount = moneyAmount - 10;
             Debug.Log("Potion purchased, money: " + moneyAmount);
@@ -64,7 +74,7 @@ public class UI_Shop : MonoBehaviour
         if(charmUI.HasCharm())
         {
             Text text = BuyCharmButton.GetComponentInChildren<Text>();
-            text.text = "Already purchased!";
+            text.text = "Already bought!";
         }
         if (moneyAmount >= 20)
         {
@@ -88,7 +98,7 @@ public class UI_Shop : MonoBehaviour
         if(swordUI.SwordStatus())
         {
             Text text = BuySwordButton.GetComponentInChildren<Text>();
-            text.text = "Already purchased!";
+            text.text = "Already bought!";
         }
         else if (moneyAmount >= 25)
         {

@@ -26,7 +26,10 @@ public class Interactions : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Interactable?.Interact(dialogueUI: dialogueUI);
+            if(dialogueUI.IsOpen == false)
+            {
+                Interactable?.Interact(dialogueUI: dialogueUI);
+            }
             Shop?.Interact(shopUI: shopUI);
         }
     }
