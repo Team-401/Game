@@ -8171,6 +8171,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2c876b9dc9763341bfba6a6adf5821c, type: 3}
+--- !u!114 &863433329 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3754362102919374141, guid: d2c876b9dc9763341bfba6a6adf5821c,
+    type: 3}
+  m_PrefabInstance: {fileID: 863433328}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378617bb1d5268d47bf7f00636c58130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &863433330 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3754362102243326012, guid: d2c876b9dc9763341bfba6a6adf5821c,
+    type: 3}
+  m_PrefabInstance: {fileID: 863433328}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bcd18e8c6072554ca6aa3424bc98421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &874931339
 GameObject:
   m_ObjectHideFlags: 0
@@ -9180,6 +9204,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1874545405}
   player: {fileID: 1874545403}
+  coinUI: {fileID: 863433330}
+  potionUI: {fileID: 2109757988}
+  swordUI: {fileID: 863433329}
+  charmUI: {fileID: 1804928828}
 --- !u!1 &1035382225
 GameObject:
   m_ObjectHideFlags: 0

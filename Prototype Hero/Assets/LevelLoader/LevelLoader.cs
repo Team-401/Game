@@ -7,17 +7,7 @@ public class LevelLoader : MonoBehaviour
 {
     public Animator transition;
     public float transitionTime = 1f;
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void LoadNextLevel()
     {
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
@@ -32,6 +22,13 @@ public class LevelLoader : MonoBehaviour
         {
             levelIndex = 0;
         }
+
+        PlayerPrefs.SetInt("coins", 0);
+        PlayerPrefs.SetInt("potions", 0);
+        PlayerPrefs.SetInt("charm", 0);
+        PlayerPrefs.SetInt("sword", 0);
+
+
         SceneManager.LoadScene(levelIndex);
 
 
