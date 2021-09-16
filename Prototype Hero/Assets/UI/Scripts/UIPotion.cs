@@ -39,4 +39,9 @@ public class UIPotion : MonoBehaviour
     {
         potionCount--;
     }
+
+    public static int drinkPotion(int currentHealth)
+    {
+        return currentHealth += 40;
+    }
 }

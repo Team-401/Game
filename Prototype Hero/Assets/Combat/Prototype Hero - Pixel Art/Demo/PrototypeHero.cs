@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PrototypeHero : MonoBehaviour {
 
+    public UIHeroHPBar UIHpBar; 
     public float      m_runSpeed = 4.5f;
     public float      m_walkSpeed = 2.0f;
     public float      m_jumpForce = 7.5f;
@@ -71,6 +72,9 @@ public class PrototypeHero : MonoBehaviour {
     {
         currentHealth = maxHealth;
 
+        // Sets the Players Max Health
+        UIHpBar.SetMaxHealth(maxHealth);
+
         //if (GameState.isComingFromForest == true)
         //{
         //    transform.position = new Vector3(8f, transform.position.y, transform.position.z);
@@ -92,6 +96,18 @@ public class PrototypeHero : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        Mathf.Clamp(currentHealth, 0, 100);
+        // Updates the Current Health to display on the UI HP Bar
+        UIHpBar.SetHealth(currentHealth);
+
+        // Conditions for using health postions and healing from using them
+        if (Input.GetKeyDown(KeyCode.E) && UIPotion.potionCount > 0 && currentHealth < 100) 
+        {
+            currentHealth = Mathf.Clamp(UIPotion.drinkPotion(currentHealth), 0, 100);
+            //Debug.Log(currentHealth);
+            UIPotion.decreasePotion();
+        }
+
         // Decrease death respawn timer 
         m_respawnTimer -= Time.deltaTime;
 
@@ -229,7 +245,7 @@ public class PrototypeHero : MonoBehaviour {
 
         // -- Handle Animations --
         //1: Death
-        if (Input.GetKeyDown("e") && !m_dodging)
+        if (Input.GetKeyDown("x") && !m_dodging)
         {
             m_animator.SetBool("noBlood", m_noBlood);
             m_animator.SetTrigger("Death");
@@ -239,13 +255,13 @@ public class PrototypeHero : MonoBehaviour {
         }
         
         //2: Hurt
-        else if (Input.GetKeyDown("q") && !m_dodging)
-        {
-            m_animator.SetTrigger("Hurt");
-            // Disable movement 
-            m_disableMovementTimer = 0.1f;
-           // DisableWallSensors();
-        }
+        //else if (Input.GetKeyDown("q") && !m_dodging)
+        //{
+        //    m_animator.SetTrigger("Hurt");
+        //    // Disable movement 
+        //    m_disableMovementTimer = 0.1f;
+        //   // DisableWallSensors();
+        //}
 
         //3: Parry & parry stance
         else if (Input.GetMouseButtonDown(1) && !m_dodging && !m_ledgeGrab && !m_ledgeClimb && !m_crouching && m_grounded)

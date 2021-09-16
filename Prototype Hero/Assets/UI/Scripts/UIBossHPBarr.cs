@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIHeroHPBar : MonoBehaviour
+public class UIBossHPBarr : MonoBehaviour
 {
     public Gradient gradient;
     public Slider slider;
     public Image fill;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,7 @@ public class UIHeroHPBar : MonoBehaviour
 
     }
 
-    public void SetMaxHealth(int maxHealth)
+    public void SetBossMaxHealth(int maxHealth)
     {
         slider.value = maxHealth;
         slider.maxValue = maxHealth;
@@ -28,10 +30,9 @@ public class UIHeroHPBar : MonoBehaviour
         fill.color = gradient.Evaluate(1f);
     }
 
-    public void SetHealth(int health)
+    public void SetBossHealth(int health)
     {
         slider.value = health;
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
-
 }
