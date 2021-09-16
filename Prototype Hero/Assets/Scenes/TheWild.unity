@@ -7204,6 +7204,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7653501762998843925, guid: 53bdbbf36d2f1a54c8b468488165db22,
+        type: 3}
+      propertyPath: BossHPBarrUI
+      value: 
+      objectReference: {fileID: 1347825328}
+    - target: {fileID: 7653501762998843925, guid: 53bdbbf36d2f1a54c8b468488165db22,
+        type: 3}
+      propertyPath: ShowBossHPBarUI
+      value: 
+      objectReference: {fileID: 2100699882}
     - target: {fileID: 8670162465947549202, guid: 53bdbbf36d2f1a54c8b468488165db22,
         type: 3}
       propertyPath: m_Name
@@ -11072,6 +11082,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1347825325 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6327041104732828055, guid: d2c876b9dc9763341bfba6a6adf5821c,
+    type: 3}
+  m_PrefabInstance: {fileID: 863433328}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1347825328 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5010198080910323364, guid: d2c876b9dc9763341bfba6a6adf5821c,
+    type: 3}
+  m_PrefabInstance: {fileID: 863433328}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347825325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e11258d181939f4d80db5d2595c6c44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1351620889
 GameObject:
   m_ObjectHideFlags: 0
@@ -43307,6 +43335,25 @@ Transform:
   m_Father: {fileID: 1801776490}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2100699880 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4072430116171248997, guid: d2c876b9dc9763341bfba6a6adf5821c,
+    type: 3}
+  m_PrefabInstance: {fileID: 863433328}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2100699882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100699880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734b00dc63061744a85206d46105477e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossHealthBar: {fileID: 1347825325}
 --- !u!1 &2103222475
 GameObject:
   m_ObjectHideFlags: 0
