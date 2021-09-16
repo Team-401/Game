@@ -7,6 +7,8 @@ public class NecromancerSecondStage : MonoBehaviour
     [SerializeField] bool m_noBlood = false;
     [SerializeField] private Transform pfBolt;
 
+    public UIBossHPBarr BossHPBarrUI;
+    public UIShowBossHPBar ShowBossHPBarUI;
     private Animator m_animator;
     private Rigidbody2D m_body2d;
     private Sensor_Necromancer m_groundSensor;
@@ -35,6 +37,7 @@ public class NecromancerSecondStage : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        BossHPBarrUI.SetBossMaxHealth(MaxHealth);
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Necromancer>();
@@ -47,6 +50,7 @@ public class NecromancerSecondStage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        BossHPBarrUI.SetBossHealth(_currentHealth);
         if (m_isDead)
         {
             return;
@@ -110,6 +114,8 @@ public class NecromancerSecondStage : MonoBehaviour
             m_animator.SetTrigger("Spellcast");
 
             Invoke("GreenBolt", greenBoltDelay);
+            //If Hero is in range, display Boss Health Bar on UI 
+            ShowBossHPBarUI.showBossHealthBar();
         }
 
         //Spellcast

@@ -7,6 +7,8 @@ public class Necromancer : MonoBehaviour {
     //[SerializeField] float      m_jumpForce = 7.5f;
     [SerializeField] bool       m_noBlood = false;
 
+    public UIBossHPBarr        BossHPBarrUI;
+    public UIShowBossHPBar     ShowBossHPBarUI;
     private Animator            m_animator;
     private Rigidbody2D         m_body2d;
     private Sensor_Necromancer  m_groundSensor;
@@ -33,6 +35,7 @@ public class Necromancer : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        BossHPBarrUI.SetBossMaxHealth(MaxHealth);
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Necromancer>();
@@ -45,6 +48,7 @@ public class Necromancer : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        BossHPBarrUI.SetBossHealth(_currentHealth);
         if (m_isDead)
         {
             return;
@@ -138,6 +142,8 @@ public class Necromancer : MonoBehaviour {
 
             //This is not animation, this is the actual movement of the player
             transform.position = newLocation;
+            //If Hero is in range, display Boss Health Bar on UI 
+            ShowBossHPBarUI.showBossHealthBar();
         }
 
         //Idle
@@ -191,6 +197,7 @@ public class Necromancer : MonoBehaviour {
         Destroy(m_boxCollider);
 
         Invoke("cleanupDeath", 2.0f);
+        //Hides Boss health bar upon defeat
     }
 
     void cleanupDeath()

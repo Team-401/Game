@@ -41,4 +41,9 @@ public class UIShowBossHPBar : MonoBehaviour
     {
         _showHealthBar = true;
     }
+
+    public void HideBossHealthBar()
+    {
+        _showHealthBar = false;
+    }
 }
