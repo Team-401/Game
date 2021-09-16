@@ -30,7 +30,7 @@ public class UICoin : MonoBehaviour
 
     public void BanditLoot()
     {
-        increaseCoins(60);
+        increaseCoins(26);
     }
 
     public void increaseCoins(int coins)

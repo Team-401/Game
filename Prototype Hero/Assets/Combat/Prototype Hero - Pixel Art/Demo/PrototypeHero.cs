@@ -93,6 +93,7 @@ public class PrototypeHero : MonoBehaviour {
         {
             currentHealth = Mathf.Clamp(potionUI.drinkPotion(currentHealth), 0, 100);
             potionUI.decreasePotion();
+            UIHpBar.SetHealth(currentHealth);
         }
 
 
