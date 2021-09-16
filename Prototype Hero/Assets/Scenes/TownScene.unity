@@ -121,6 +121,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &14595209 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6327041104732828055, guid: d2c876b9dc9763341bfba6a6adf5821c,
+    type: 3}
+  m_PrefabInstance: {fileID: 700275348670747846}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &41620340
 GameObject:
   m_ObjectHideFlags: 0
@@ -4041,6 +4047,25 @@ Transform:
   m_Father: {fileID: 1062811380}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1611167072 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4072430116171248997, guid: d2c876b9dc9763341bfba6a6adf5821c,
+    type: 3}
+  m_PrefabInstance: {fileID: 700275348670747846}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1611167074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611167072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734b00dc63061744a85206d46105477e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossHealthBar: {fileID: 14595209}
 --- !u!114 &1612412585 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4143540467848228987, guid: d2c876b9dc9763341bfba6a6adf5821c,
