@@ -87,10 +87,10 @@ public class NecromancerSecondStage : MonoBehaviour
 
         if (m_timeSinceMeleeAttack < 1.2) { }
         //Hurt
-        else if (Input.GetKeyDown("q"))
-        {
-            m_animator.SetTrigger("Hurt");
-        }
+        //else if (Input.GetKeyDown("q"))
+        //{
+        //    m_animator.SetTrigger("Hurt");
+        //}
 
         //Attack
         else if (distanceFromPlayer < attackStartDistance && m_timeSinceMeleeAttack > timeBetweenAttacks)
@@ -136,7 +136,10 @@ public class NecromancerSecondStage : MonoBehaviour
         _currentHealth -= damage;
         Debug.Log("Enemy health at " + _currentHealth);
 
-        m_animator.SetTrigger("Hurt");
+        if (m_timeSinceMeleeAttack > 1.2)
+        {
+            m_animator.SetTrigger("Hurt");
+        }
 
         if (_currentHealth <= 0)
         {
@@ -148,24 +151,30 @@ public class NecromancerSecondStage : MonoBehaviour
 
     public void HandleAttackSwordHardwired()
     {
-        // Check if player in target area
-        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPointBasic.position, attackHitRange, playerLayer);
-
-        // If so call enemy method somehow
-        foreach (Collider2D player in hitPlayers)
+        if (!m_isDead)
         {
-            Debug.Log("The player" + player.name + " was hit");
-            player.GetComponent<PrototypeHero>().TakeDamage(attackDamageMelee);
+            // Check if player in target area
+            Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPointBasic.position, attackHitRange, playerLayer);
+
+            // If so call enemy method somehow
+            foreach (Collider2D player in hitPlayers)
+            {
+                Debug.Log("The player" + player.name + " was hit");
+                player.GetComponent<PrototypeHero>().TakeDamage(attackDamageMelee);
+            }
         }
     }
 
     void GreenBolt()
     {
-        Transform boltTransform = Instantiate(pfBolt, BoltSpawnPoint.position, Quaternion.identity);
+        if (!m_isDead)
+        {
+            Transform boltTransform = Instantiate(pfBolt, BoltSpawnPoint.position, Quaternion.identity);
 
-        Vector3 flightTrajectory = (player.position - BoltSpawnPoint.position).normalized;
+            Vector3 flightTrajectory = (player.position - BoltSpawnPoint.position).normalized;
 
-        boltTransform.GetComponent<GreenBoltScript>().Setup(flightTrajectory);
+            boltTransform.GetComponent<GreenBoltScript>().Setup(flightTrajectory);
+        }
     }
 
     void Die()
