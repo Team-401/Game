@@ -542,6 +542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potionText: {fileID: 4444433569144899908}
+  potionCount: 0
 --- !u!1 &4444433569214649872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,6 +1205,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinText: {fileID: 4444433570547330948}
+  coinCount: 0
+  canBuyItem: 0
 --- !u!1 &6807695396522468905
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,21 +1261,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gradient:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 0.3962264, g: 0, b: 0.102217495, a: 1}
+    key1: {r: 0.6509434, g: 0, b: 0.1507447, a: 1}
+    key2: {r: 0.735849, g: 0, b: 0.27389985, a: 0}
+    key3: {r: 0.30925912, g: 0, b: 0.4245283, a: 0}
+    key4: {r: 0.610472, g: 0.1009256, b: 0.7924528, a: 0}
+    key5: {r: 0.74581325, g: 0, b: 0.9150943, a: 0}
+    key6: {r: 0.53673375, g: 0, b: 0.8509804, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
+    ctime1: 6512
+    ctime2: 32440
+    ctime3: 32505
+    ctime4: 39349
+    ctime5: 49163
+    ctime6: 65397
     ctime7: 0
     atime0: 0
     atime1: 65535
@@ -1283,7 +1286,7 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 2
+    m_NumColorKeys: 7
     m_NumAlphaKeys: 2
   slider: {fileID: 3169034837073561554}
   fill: {fileID: 6235826366081812382}
