@@ -115,7 +115,7 @@ public class NecromancerSecondStage : MonoBehaviour
 
             Invoke("GreenBolt", greenBoltDelay);
             //If Hero is in range, display Boss Health Bar on UI 
-            ShowBossHPBarUI.showBossHealthBar();
+            /*ShowBossHPBarUI.showBossHealthBar();*/
         }
 
         //Spellcast
