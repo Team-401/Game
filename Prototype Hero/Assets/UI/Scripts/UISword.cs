@@ -8,33 +8,29 @@ public class UISword : MonoBehaviour
     public Image UIUpgradedSword;
     public bool swordIsUpgraded = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         UIUpgradedSword = GetComponent<Image>();
+        int pref = PlayerPrefs.GetInt("sword");
+        if(pref != 0)
+        {
+            swordIsUpgraded = true;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(swordIsUpgraded == true)
+        if(swordIsUpgraded)
         {
-            UISwordAlphaUp(1f);
+            UISwordAlphaSet(1f);
         }
         else
         {
-            UISwordAlphaDown(.5f);
+            UISwordAlphaSet(.3f);
         }
     }
 
-    public void UISwordAlphaUp(float input)
-    {
-        var alpha = UIUpgradedSword.color;
-        alpha.a = input;
-        UIUpgradedSword.color = alpha;
-    }
-
-    public void UISwordAlphaDown(float input)
+    public void UISwordAlphaSet(float input)
     {
         var alpha = UIUpgradedSword.color;
         alpha.a = input;
@@ -44,5 +40,10 @@ public class UISword : MonoBehaviour
     public void UpgradeSword()
     {
         swordIsUpgraded = true;
+    }
+
+    public bool SwordStatus()
+    {
+        return swordIsUpgraded;
     }
 }
