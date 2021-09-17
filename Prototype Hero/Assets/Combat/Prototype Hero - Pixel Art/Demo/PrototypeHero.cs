@@ -6,6 +6,7 @@ public class PrototypeHero : MonoBehaviour {
     public UIHeroHPBar UIHpBar;
     public UIPotion potionUI;
     public UI_Shop shopUI;
+    public DialogueUI dialogueUI;
 
     public float      m_runSpeed = 4.5f;
     public float      m_walkSpeed = 2.0f;
@@ -80,11 +81,21 @@ public class PrototypeHero : MonoBehaviour {
         m_gravity = m_body2d.gravityScale;
 
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Prototype>();
+       
     }
 
     // Update is called once per frame
     void Update ()
     {
+
+        if(shopUI.IsOpen)
+        {
+            return;
+        }
+        Mathf.Clamp(currentHealth, 0, 100);
+        // Updates the Current Health to display on the UI HP Bar
+        UIHpBar.SetHealth(currentHealth);
+      
         // Conditions for using health postions and healing from using them
         if (Input.GetKeyDown(KeyCode.E) && potionUI.potionCount > 0 && currentHealth < 100) 
         {
