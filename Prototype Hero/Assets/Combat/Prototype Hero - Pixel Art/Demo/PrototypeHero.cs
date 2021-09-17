@@ -5,7 +5,7 @@ public class PrototypeHero : MonoBehaviour {
 
     public UIHeroHPBar UIHpBar;
     public UIPotion potionUI;
-    public UIShop shopUI;
+    public UI_Shop shopUI;
 
     public float      m_runSpeed = 4.5f;
     public float      m_walkSpeed = 2.0f;
@@ -393,7 +393,7 @@ public class PrototypeHero : MonoBehaviour {
             {
                 enemy.GetComponent<NecromancerSecondStage>().TakeDamage(damage * attackDamage);
             }
-            else if (enemy.name == "LightBandit" || enemy.name == "HeavyBandit") ;
+            else
             {
                 enemy.GetComponent<BanditNPC>().TakeDamage(damage*attackDamage);
             }
