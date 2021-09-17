@@ -17,6 +17,11 @@ public class MainMenu : MonoBehaviour
     }
     public void PlayGame()
     {
+        PlayerPrefs.SetInt("coins", 0);
+        PlayerPrefs.SetInt("potions", 0);
+        PlayerPrefs.SetInt("charm",0);
+        PlayerPrefs.SetInt("sword", 0);
+
         SceneManager.LoadScene(1);
     }
     public void QuitGame()
