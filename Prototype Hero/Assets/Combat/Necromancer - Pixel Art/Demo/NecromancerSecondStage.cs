@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NecromancerSecondStage : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class NecromancerSecondStage : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        BossHPBarrUI.SetBossMaxHealth(MaxHealth);
+        /*BossHPBarrUI.SetBossMaxHealth(MaxHealth);*/
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Necromancer>();
@@ -50,7 +51,6 @@ public class NecromancerSecondStage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        BossHPBarrUI.SetBossHealth(_currentHealth);
         if (m_isDead)
         {
             return;
@@ -91,10 +91,10 @@ public class NecromancerSecondStage : MonoBehaviour
 
         if (m_timeSinceMeleeAttack < 1.2) { }
         //Hurt
-        else if (Input.GetKeyDown("q"))
-        {
-            m_animator.SetTrigger("Hurt");
-        }
+        //else if (Input.GetKeyDown("q"))
+        //{
+        //    m_animator.SetTrigger("Hurt");
+        //}
 
         //Attack
         else if (distanceFromPlayer < attackStartDistance && m_timeSinceMeleeAttack > timeBetweenAttacks)
@@ -115,7 +115,7 @@ public class NecromancerSecondStage : MonoBehaviour
 
             Invoke("GreenBolt", greenBoltDelay);
             //If Hero is in range, display Boss Health Bar on UI 
-            ShowBossHPBarUI.showBossHealthBar();
+            /*ShowBossHPBarUI.showBossHealthBar();*/
         }
 
         //Spellcast
@@ -140,9 +140,13 @@ public class NecromancerSecondStage : MonoBehaviour
 
         // Put in a text or something like that to show damage over the bandits head
         _currentHealth -= damage;
+        BossHPBarrUI.SetBossHealth(_currentHealth);
         Debug.Log("Enemy health at " + _currentHealth);
 
-        m_animator.SetTrigger("Hurt");
+        if (m_timeSinceMeleeAttack > 1.2)
+        {
+            m_animator.SetTrigger("Hurt");
+        }
 
         if (_currentHealth <= 0)
         {
@@ -154,42 +158,54 @@ public class NecromancerSecondStage : MonoBehaviour
 
     public void HandleAttackSwordHardwired()
     {
-        // Check if player in target area
-        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPointBasic.position, attackHitRange, playerLayer);
-
-        // If so call enemy method somehow
-        foreach (Collider2D player in hitPlayers)
+        if (!m_isDead)
         {
-            Debug.Log("The player" + player.name + " was hit");
-            player.GetComponent<PrototypeHero>().TakeDamage(attackDamageMelee);
+            // Check if player in target area
+            Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPointBasic.position, attackHitRange, playerLayer);
+
+            // If so call enemy method somehow
+            foreach (Collider2D player in hitPlayers)
+            {
+                Debug.Log("The player" + player.name + " was hit");
+                player.GetComponent<PrototypeHero>().TakeDamage(attackDamageMelee);
+            }
         }
     }
 
     void GreenBolt()
     {
-        Transform boltTransform = Instantiate(pfBolt, BoltSpawnPoint.position, Quaternion.identity);
+        if (!m_isDead)
+        {
+            Transform boltTransform = Instantiate(pfBolt, BoltSpawnPoint.position, Quaternion.identity);
 
-        Vector3 flightTrajectory = (player.position - BoltSpawnPoint.position).normalized;
+            Vector3 flightTrajectory = (player.position - BoltSpawnPoint.position).normalized;
 
-        boltTransform.GetComponent<GreenBoltScript>().Setup(flightTrajectory);
+            boltTransform.GetComponent<GreenBoltScript>().Setup(flightTrajectory);
+        }
     }
 
     void Die()
     {
         m_isDead = true;
-        Debug.Log("The enemy is dead!");
+        Debug.Log("The necromancer is dead!");
 
 
         Destroy(m_body2d);
         Destroy(m_boxCollider);
 
-        Invoke("cleanupDeath", 2.0f);
+        Invoke("startCredits", 5f);
     }
 
-    void cleanupDeath()
+    void startCredits()
+    {
+        Debug.Log("Entered CreditsDelay Method");
+        SceneManager.LoadScene(3);
+    }
+
+/*    void cleanupDeath()
     {
         Destroy(this.gameObject);
-    }
+    }*/
 
     private void OnDrawGizmosSelected()
     {

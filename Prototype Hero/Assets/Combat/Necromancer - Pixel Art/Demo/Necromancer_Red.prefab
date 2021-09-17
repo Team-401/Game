@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_noBlood: 0
-  pfBolt: {fileID: 3115741878371457147, guid: 2285aaaf2a2febd4fbd4dfc9e5028dde, type: 3}
+  pfBolt: {fileID: 3115741878371457147, guid: a64dfaffe9a696943adbdcd2bcb46d08, type: 3}
   MaxHealth: 100
   detectionRange: 0
   smallestApproachDistance: 0
