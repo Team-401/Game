@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e68a44a5234024d8146e6d0df868c5, type: 3}
+  m_Name: ShopKeeper
+  m_EditorClassIdentifier: 
+  dialogue:
+  - "Hmmm, welcome\u2026 You appear to be a prototype, but I think you'll do just
+    fine..."
+  - There's a dark wizard in the woods outside of town, he's well guarded by men
+    and magic alike.
+  - "In order to get him and prove yourself, you'll need all your skills\u2026 that
+    and my magic amulet."
+  - What's that? Did you think I'd give it to you for free? HA! Not a chance.
+  - You need to go out into the wild and get me gold.
+  - With enough gold you might be able to buy some extra goods to help you on your
+    quest.
+  - Oh, and if you see a statue in the woods, beware.
+  - It's the necromancer's guardian, and it's magic will hold you back.
+  - Unless you have a magic charm, that is...
+  - Please, go buy from my shop so I can go to the casino!
+  - ... I've been wanting to play Craps for weeks, just need more coin...
+  - "If you'd like I'd be happy to educate you on all things \"craps\" related...\r"
+  - The fundamental bet in craps is the Pass line bet.
+  - It is a bet for the shooter to win!
+  - You have to go? Oh... well come back soon!

@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Death
+  - PlayerCollision
   layers:
   - Default
   - TransparentFX
@@ -28,8 +31,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Enemy
+  - Player
   - 
   - 
   - 
@@ -38,6 +41,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3474105511
+    locked: 0
+  - name: MiddleGround
+    uniqueID: 957799661
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 2208202331
     locked: 0
