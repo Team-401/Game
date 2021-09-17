@@ -21,6 +21,7 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetInt("potions", 0);
         PlayerPrefs.SetInt("charm",0);
         PlayerPrefs.SetInt("sword", 0);
+        PlayerPrefs.SetString("cokos", "no");
 
         SceneManager.LoadScene(1);
     }
