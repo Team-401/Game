@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NecromancerSecondStage : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class NecromancerSecondStage : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        BossHPBarrUI.SetBossMaxHealth(MaxHealth);
+        /*BossHPBarrUI.SetBossMaxHealth(MaxHealth);*/
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Necromancer>();
@@ -50,7 +51,6 @@ public class NecromancerSecondStage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        BossHPBarrUI.SetBossHealth(_currentHealth);
         if (m_isDead)
         {
             return;
@@ -140,6 +140,7 @@ public class NecromancerSecondStage : MonoBehaviour
 
         // Put in a text or something like that to show damage over the bandits head
         _currentHealth -= damage;
+        BossHPBarrUI.SetBossHealth(_currentHealth);
         Debug.Log("Enemy health at " + _currentHealth);
 
         if (m_timeSinceMeleeAttack > 1.2)
@@ -186,19 +187,25 @@ public class NecromancerSecondStage : MonoBehaviour
     void Die()
     {
         m_isDead = true;
-        Debug.Log("The enemy is dead!");
+        Debug.Log("The necromancer is dead!");
 
 
         Destroy(m_body2d);
         Destroy(m_boxCollider);
 
-        Invoke("cleanupDeath", 2.0f);
+        Invoke("startCredits", 5f);
     }
 
-    void cleanupDeath()
+    void startCredits()
+    {
+        Debug.Log("Entered CreditsDelay Method");
+        SceneManager.LoadScene(3);
+    }
+
+/*    void cleanupDeath()
     {
         Destroy(this.gameObject);
-    }
+    }*/
 
     private void OnDrawGizmosSelected()
     {

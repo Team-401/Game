@@ -10342,6 +10342,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bcd18e8c6072554ca6aa3424bc98421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &863433331 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 700275348408045727, guid: d2c876b9dc9763341bfba6a6adf5821c,
+    type: 3}
+  m_PrefabInstance: {fileID: 863433328}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9116736fcddcde64aaa83a7b66bf59ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &874931339
 GameObject:
   m_ObjectHideFlags: 0
@@ -19363,6 +19375,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: PlayerCollision
       objectReference: {fileID: 0}
+    - target: {fileID: 5779919143759674799, guid: e481822248898d04e9808a3d3ca78e5a,
+        type: 3}
+      propertyPath: shopUI
+      value: 
+      objectReference: {fileID: 863433331}
     - target: {fileID: 5779919143759674799, guid: e481822248898d04e9808a3d3ca78e5a,
         type: 3}
       propertyPath: UIHpBar
