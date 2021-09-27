@@ -193,6 +193,7 @@ public class NecromancerSecondStage : MonoBehaviour
         Destroy(m_body2d);
         Destroy(m_boxCollider);
 
+        Cursor.visible = true;
         Invoke("startCredits", 5f);
     }
 
